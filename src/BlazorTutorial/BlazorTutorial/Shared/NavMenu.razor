@@ -1,0 +1,80 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Blazor-Tutorial</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        @* <li class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </li> *@
+        <li class="nav-item px-3">
+            <NavLink class="nav-link">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Tutorial
+            </NavLink>
+            <u>
+                <li class="nav-item px-2">
+                    <NavLink class="nav-link" href="/">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Getting started
+                    </NavLink>
+                </li>
+                <li class="nav-item px-2">
+                    <NavLink class="nav-link" href="">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Documentation
+                    </NavLink>
+                </li>
+                <li class="nav-item px-2">
+                    <NavLink class="nav-link" href="">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Components
+                    </NavLink>
+                    <u>
+                        <li class="nav-item px-2">
+                            <NavLink class="nav-link" href="componentspage/markdowneditor">
+                                <span class="oi oi-list-rich" aria-hidden="true"></span> Markdown Editor
+                            </NavLink>
+                        </li>
+                        <li class="nav-item px-2">
+                            <NavLink class="nav-link" href="componentspage">
+                                <span class="oi oi-list-rich" aria-hidden="true"></span> Markdown Viewer
+                            </NavLink>
+                        </li>
+                    </u>
+                </li>
+                <li class="nav-item px-2">
+                    <NavLink class="nav-link" href="">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> FAQs
+                    </NavLink>
+                </li>
+            </u>
+        </li>
+    </ul>
+</div>
+
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}
