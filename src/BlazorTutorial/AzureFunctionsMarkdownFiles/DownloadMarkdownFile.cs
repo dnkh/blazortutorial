@@ -9,6 +9,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
+using System;
 
 namespace AzureFunctionsMarkdownFiles
 {
@@ -16,12 +17,16 @@ namespace AzureFunctionsMarkdownFiles
     {
         [FunctionName("DownloadMarkdownFile")]
         public static async Task<HttpResponseMessage> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "DownloadMarkdownFile/{blobName}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadMarkdownFile/{blobName}")] HttpRequest req,
             string blobName)
         {
-            StorageCredentials storageCredentials = new ("Storage", "CamEKgqVaylmQ.....ow2VHlyCww=="); // adjust
+            string storageName = Environment.GetEnvironmentVariable("StorageName");
+            string storageSecret = Environment.GetEnvironmentVariable("StorageSecret");
+            string containerName = Environment.GetEnvironmentVariable("ContainerName");
+
+            StorageCredentials storageCredentials = new (storageName, storageSecret);
             CloudStorageAccount storageAccount = new (storageCredentials, true);
-            CloudBlobContainer container = storageAccount.CreateCloudBlobClient().GetContainerReference("MyBlobContainer");
+            CloudBlobContainer container = storageAccount.CreateCloudBlobClient().GetContainerReference(containerName);
             CloudBlockBlob block = container.GetBlockBlobReference(blobName);
             Stream blobStream = await block.OpenReadAsync();
 
@@ -35,6 +40,7 @@ namespace AzureFunctionsMarkdownFiles
                 FileName = $"CopyOf_{block.Name}",
                 Size = block.Properties.Length
             };
+
             return message;
         }
     }
