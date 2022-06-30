@@ -1,4 +1,4 @@
-﻿@page "/markdownviewer"
+﻿@page "/{lang}/markdownviewer"
 
 <PageTitle>MarkdownViewer</PageTitle>
 <MarkdownViewer Body="@MarkdownText"></MarkdownViewer>
@@ -9,6 +9,8 @@
 
 @code
 {
+    [Parameter]
+    public string Lang { get; set; }
     public string MarkdownText { get; set; } = "**Hallo Welt**";
     public string MarkdownText1 { get; set; } = "_Hallo Welt_";
     public string MarkdownText2 { get; set; } = "- Hallo Welt";
