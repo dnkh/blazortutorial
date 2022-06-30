@@ -1,8 +1,9 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavManager;
 
 <div class="page">
     <div class="sidebar">
-        <NavMenu />
+        <NavMenu Lang="@Lang" />
     </div>
 
     <main>
@@ -16,3 +17,28 @@
         </article>
     </main>
 </div>
+
+@code {
+    private string Lang { get; set; } = CultureHelper.DefaultLangauge;
+
+    protected override void OnInitialized()
+    {
+        this.Lang = NavManager.Uri.UriLanguage();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (this.IsNotValidLanguage())
+            {
+                NavManager.NavigateTo($"/{CultureHelper.DefaultLangauge}", forceLoad: true);
+            }
+        }
+    }
+
+    private bool IsNotValidLanguage()
+    {
+        return string.IsNullOrEmpty(this.Lang) || !CultureHelper.Languages.Contains(this.Lang);
+    }
+}
