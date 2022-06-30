@@ -1,4 +1,8 @@
-@page "/componentspage"
+@page "/{lang}/componentspage"
 
 <PageTitle>Components</PageTitle>   
-<h1>Compontents page</h1>
+
+@code {
+    [Parameter]
+    public string Lang { get; set; }
+}
