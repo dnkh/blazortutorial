@@ -1,0 +1,11 @@
+﻿@using Markdig
+
+<div class="row">
+    <div class="col-6">
+        @((MarkupString) Markdown.ToHtml(Body))
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string Body { get; set; }
+}
