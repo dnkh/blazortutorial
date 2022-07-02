@@ -6,42 +6,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using System.Net.Http;
-using System.Net;
-using System.Net.Http.Headers;
 using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AzureFunctionsMarkdownFiles
 {
     public static class DownloadMarkdownFile
     {
         [FunctionName("DownloadMarkdownFile")]
-        public static async Task<HttpResponseMessage> Run(
+        public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadMarkdownFile/{blobName}")] HttpRequest req,
             string blobName)
         {
-            string storageName = Environment.GetEnvironmentVariable("StorageName");
-            string storageSecret = Environment.GetEnvironmentVariable("StorageSecret");
+            string sasToken = Environment.GetEnvironmentVariable("SASToken");
+            string accountName = Environment.GetEnvironmentVariable("AccountName");
             string containerName = Environment.GetEnvironmentVariable("ContainerName");
 
-            StorageCredentials storageCredentials = new (storageName, storageSecret);
-            CloudStorageAccount storageAccount = new (storageCredentials, true);
-            CloudBlobContainer container = storageAccount.CreateCloudBlobClient().GetContainerReference(containerName);
-            CloudBlockBlob block = container.GetBlockBlobReference(blobName);
-            Stream blobStream = await block.OpenReadAsync();
+            StorageCredentials credentials = new (sasToken);
+            CloudStorageAccount storageacc = new (credentials, accountName, endpointSuffix: null, useHttps: true);
+            CloudBlobClient blobClient = storageacc.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+            var blobRef = container.GetBlobReference(blobName);
+            var fileStream = await blobRef.OpenReadAsync();
+            StreamReader sr = new(fileStream);
+            var filecontent = await sr.ReadToEndAsync();
 
-            HttpResponseMessage message = new (HttpStatusCode.OK);
-            message.Content = new StreamContent(blobStream);
-            message.Content.Headers.ContentLength = block.Properties.Length;
-            message.StatusCode = HttpStatusCode.OK;
-            message.Content.Headers.ContentType = new MediaTypeHeaderValue(block.Properties.ContentType);
-            message.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-            {
-                FileName = $"CopyOf_{block.Name}",
-                Size = block.Properties.Length
-            };
-
-            return message;
+            return new OkObjectResult(filecontent);
         }
     }
 }
