@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "ea86ba41-9521-4fd5-b494-3f65f4a6432c",
+		"name": "Blazor Tutorial Backend 2022",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UploadMarkdownFile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "File",
+							"type": "file",
+							"src": "/Users/jweidmann/Downloads/TestFile.rtf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/UploadMarkdownFile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"UploadMarkdownFile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DownloadMarkdownFile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/DownloadMarkdownFile/TestFile.rtf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"DownloadMarkdownFile",
+						"TestFile.rtf"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
