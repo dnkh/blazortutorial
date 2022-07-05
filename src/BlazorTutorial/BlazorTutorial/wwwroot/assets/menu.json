@@ -1,0 +1,45 @@
+﻿[
+  {
+    "Link": "",
+    "Text": "Home",
+    "IconName": "oi-home",
+    "Children": []
+  },
+  {
+    "Link": "gettingstarted",
+    "Text": "Getting started",
+    "IconName": "oi-play-circle",
+    "Children": []
+  },
+  {
+    "Link": "documentation",
+    "Text": "Documentation",
+    "IconName": "oi-book",
+    "Children": []
+  },
+  {
+    "Link": "components",
+    "Text": "Components",
+    "IconName": "oi-wrench",
+    "Children": [
+      {
+        "Link": "markdowneditor",
+        "Text": "Mark Down Editor",
+        "IconName": "oi-pencil",
+        "Children": []
+      },
+      {
+        "Link": "markdownviewer",
+        "Text": "Mark Down Viewer",
+        "IconName": "oi-magnifying-glass",
+        "Children": []
+      }
+    ]
+  },
+  {
+    "Link": "faqs",
+    "Text": "FAQs",
+    "IconName": "oi-question-mark",
+    "Children": []
+  }
+]
