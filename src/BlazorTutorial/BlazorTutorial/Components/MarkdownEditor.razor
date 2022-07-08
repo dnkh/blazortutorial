@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-6">
+        <textarea class="form-control" value="@Body" @oninput="ChangeValueAsync">
+        </textarea>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Body { get; set; } = "";
+    [Parameter]
+    public EventCallback<string> BodyChanged { get; set; }
+    private async Task ChangeValueAsync(ChangeEventArgs e)
+    {
+        Body = e.Value.ToString();
+        await BodyChanged.InvokeAsync(Body);
+    }
+
+}
