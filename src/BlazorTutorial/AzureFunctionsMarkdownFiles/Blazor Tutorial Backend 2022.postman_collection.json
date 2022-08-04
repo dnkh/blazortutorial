@@ -55,6 +55,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GetAllMarkdownFileNames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/GetAllMarkdownFileNames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GetAllMarkdownFileNames"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
