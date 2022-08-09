@@ -75,6 +75,80 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "UploadMarkdownFile - Az",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "File",
+							"type": "file",
+							"src": "/Users/jweidmann/Downloads/TestFile3.rtf"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile",
+					"protocol": "https",
+					"host": [
+						"blazortutorialbackendfunctions",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"UploadMarkdownFile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DownloadMarkdownFile - Az",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/TestFile3.rtf",
+					"protocol": "https",
+					"host": [
+						"blazortutorialbackendfunctions",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"DownloadMarkdownFile",
+						"TestFile3.rtf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllMarkdownFileNames - Az",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://blazortutorialbackendfunctions.azurewebsites.net/api/GetAllMarkdownFileNames",
+					"protocol": "https",
+					"host": [
+						"blazortutorialbackendfunctions",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"GetAllMarkdownFileNames"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
