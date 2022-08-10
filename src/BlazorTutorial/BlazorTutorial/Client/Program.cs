@@ -23,6 +23,7 @@ namespace Company.WebApplication1
 
             var host = builder.Build();
             await host.SetDefaultCulture();
+            await host.RunAsync();
 
         }
     }
