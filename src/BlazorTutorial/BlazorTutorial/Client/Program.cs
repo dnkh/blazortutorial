@@ -1,9 +1,9 @@
-using BlazorTutorial;
-using BlazorTutorial.Extensions;
+using BlazorTutorial.Language;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 
-namespace Company.WebApplication1
+namespace BlazorTutorial
 {
     public class Program
     {
@@ -15,6 +15,12 @@ namespace Company.WebApplication1
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddLocalization();
+            builder.Services.AddMudServices();
+            builder.Services.AddLanguageService(new LanguageOptions()
+            {
+                TwoLetterISODefaultLanguage = "de",
+                TwoLetterISOLanguages = new[] { "de", "en" }
+            });
 
             var host = builder.Build();
             await host.SetDefaultCulture();

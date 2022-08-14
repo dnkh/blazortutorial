@@ -1,0 +1,88 @@
+﻿@page "/{lang}/mudblazor/table"
+@inject HttpClient httpClient
+@inject IStringLocalizer<Resource> Localizer
+
+<h3>MudBlazor Table</h3>
+<MudGrid>
+    <MudItem sm="8">
+        <MudTable Items="@Items" Hover="true" SortLabel="Sort By" MultiSelection="true" Height="70vh" FixedHeader="true" FixedFooter="true" Filter="new Func<MudBlazorTableItem, bool>(Filter)" @bind-SelectedItems="SelectedItems">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">@Localizer["i18n_MudBlazor_Table_Title"]</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="SearchTerm" Placeholder="Search" 
+                            Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                            IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh><MudTableSortLabel SortBy="new Func<MudBlazorTableItem, object>(x =>x.Number)"></MudTableSortLabel>@Localizer["i18n_MudBlazor_Table_Header_Number"]</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<MudBlazorTableItem, object>(x =>x.Small)"></MudTableSortLabel>@Localizer["i18n_MudBlazor_Table_Header_Sign"]</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<MudBlazorTableItem, object>(x =>x.Name)"></MudTableSortLabel>@Localizer["i18n_MudBlazor_Table_Header_Name"]</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<MudBlazorTableItem, object>(x =>x.Position)"></MudTableSortLabel>@Localizer["i18n_MudBlazor_Table_Header_Position"]</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<MudBlazorTableItem, object>(x =>x.Molar)"></MudTableSortLabel>@Localizer["i18n_MudBlazor_Table_Header_MolarMass"]</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Nr">@context.Number</MudTd>
+                <MudTd DataLabel="Sign">@context.Small</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Position">@context.Position</MudTd>
+                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager RowsPerPageString="@Localizer["i18n_MudBlazor_Table_RowsPerPage"]" HorizontalAlignment="HorizontalAlignment.Left"  />
+            </PagerContent>
+        </MudTable>
+    </MudItem>
+    <MudItem sm="4">
+        @foreach (var selectedItem in SelectedItems)
+        {
+            <MudText><b>@Localizer["i18n_MudBlazor_Table_Header_Number"]:</b> @selectedItem.Number</MudText>
+            <MudText><b>@Localizer["i18n_MudBlazor_Table_Header_Sign"]:</b> @selectedItem.Small</MudText>
+            <MudText><b>@Localizer["i18n_MudBlazor_Table_Header_Name"]:</b> @selectedItem.Name</MudText>
+            <MudText><b>@Localizer["i18n_MudBlazor_Table_Header_Position"]:</b> @selectedItem.Position</MudText>
+            <MudText><b>@Localizer["i18n_MudBlazor_Table_Header_MolarMass"]:</b> @selectedItem.Molar</MudText>
+            <MudDivider Class="my-2"/>
+        }
+    </MudItem>
+</MudGrid>
+
+
+@code {
+    [Parameter]
+    public string Lang { get; set; }
+
+    private string SearchTerm { get; set; } = "";
+
+    private HashSet<MudBlazorTableItem> SelectedItems = new HashSet<MudBlazorTableItem>();
+
+    private IEnumerable<MudBlazorTableItem> Items = new List<MudBlazorTableItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await httpClient.GetFromJsonAsync<List<MudBlazorTableItem>>("sample-data/table-data.json");
+    }
+
+    private bool Filter(MudBlazorTableItem element)
+    {
+        if (string.IsNullOrWhiteSpace(this.SearchTerm))
+        {
+            return true;
+        }
+
+        if (element.Small.Contains(this.SearchTerm, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        if (element.Name.Contains(this.SearchTerm, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        if ($"{element.Number} {element.Position} {element.Molar}".Contains(this.SearchTerm))
+        {
+            return true;
+        }
+
+        return false;
+    }
+}

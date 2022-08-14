@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorTutorial.Components\BlazorTutorial.Components.csproj" />
+    <ProjectReference Include="..\BlazorTutorial.Language\BlazorTutorial.Language.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,27 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Shared\Resources\Resource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\assets\version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Shared\Resources\Resource.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Shared\Resources\Resource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

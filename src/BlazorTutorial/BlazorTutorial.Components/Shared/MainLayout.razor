@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase
+@inject ILanguageService languageService;
+@inject IStringLocalizer<Resource> Localizer
+
+<MudThemeProvider IsDarkMode="true" Theme="_theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="0">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudSpacer />
+        <MudButtonGroup Color="Color.Primary" Size="Size.Large" Variant="Variant.Text">
+            <MudButton @onclick="@(() => this.languageService.SetLanguage("en"))"><span class="flag-icon flag-icon-gbr"></span></MudButton>
+            <MudButton @onclick="@(() => this.languageService.SetLanguage("de"))"> <span class="flag-icon flag-icon-deu"></span></MudButton>
+        </MudButtonGroup>
+        <MudIcon Icon="@Icons.Rounded.Person" Size="Size.Large"></MudIcon>
+        <MudText>@Localizer["i18n_Greeting"] @this.UserName</MudText>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
+        <Menu Lang="@this.Lang" />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-2 pt-2">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private MudTheme _theme = new();
+
+    public string Lang { get; set; } = string.Empty;
+
+    public string UserName { get; set; } = "Christian Wille";
+
+    bool _drawerOpen = true;
+
+    protected override void OnInitialized()
+    {
+        this.Lang = this.languageService.GetUriLanguage();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (!this.languageService.Exist(this.Lang))
+            {
+                this.languageService.NavigateToDefault(this.Lang);
+            }
+        }
+    }
+
+    private void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
