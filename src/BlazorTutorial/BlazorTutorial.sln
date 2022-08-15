@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTutorial", "BlazorTut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTutorial.Components", "BlazorTutorial.Components\BlazorTutorial.Components.csproj", "{62FA2A96-96C4-4122-9590-497DF62A1F84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorTutorial.Language", "BlazorTutorial.Language\BlazorTutorial.Language.csproj", "{12B029A4-6045-4E81-9F71-34EE54A3625B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTutorial.Language", "BlazorTutorial.Language\BlazorTutorial.Language.csproj", "{12B029A4-6045-4E81-9F71-34EE54A3625B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

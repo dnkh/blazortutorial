@@ -32,7 +32,7 @@
 
     public string Lang { get; set; } = string.Empty;
 
-    public string UserName { get; set; } = "Christian Wille";
+    public string UserName { get; set; } = "Christian Will";
 
     bool _drawerOpen = true;
 
@@ -45,7 +45,11 @@
     {
         if (firstRender)
         {
-            if (!this.languageService.Exist(this.Lang))
+            if (string.IsNullOrEmpty(this.Lang))
+            {
+                this.languageService.NavigateToDefault(forceLoad: false);
+            }
+            else if (!this.languageService.Exist(this.Lang))
             {
                 this.languageService.NavigateToDefault(this.Lang);
             }
