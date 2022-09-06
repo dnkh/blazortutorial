@@ -25,6 +25,19 @@ namespace AzureFunctionsMarkdownFiles
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req)
         {
+            try
+            {
+                if (req.Form.Files.Count != 1)
+                {
+                    return new BadRequestObjectResult($"Expected 1 file in request but found {req.Form.Files.Count}.");
+                }
+            }
+            catch (Exception)
+            {
+                return new BadRequestObjectResult("Parameter File is missing.");
+            }
+
+            var file = req.Form.Files[0];
             string sasToken = Environment.GetEnvironmentVariable("SASToken");
             string accountName = Environment.GetEnvironmentVariable("AccountName");
             string containerName = Environment.GetEnvironmentVariable("ContainerName");
@@ -33,12 +46,19 @@ namespace AzureFunctionsMarkdownFiles
             CloudStorageAccount storageacc = new(credentials, accountName, endpointSuffix: null, useHttps: true);
             CloudBlobClient blobClient = storageacc.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-            var file = req.Form.Files["File"];
-            Stream myBlob = file.OpenReadStream();
-            var blobRef = container.GetBlockBlobReference(file.FileName);
-            await blobRef.UploadFromStreamAsync(myBlob);
 
-            return new OkObjectResult("File uploaded successfully.");
+            try
+            {
+                Stream myBlob = file.OpenReadStream();
+                var blobRef = container.GetBlockBlobReference(file.FileName);
+                await blobRef.UploadFromStreamAsync(myBlob);
+
+                return new OkObjectResult("File uploaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult($"Could not upload file. Message: {ex.Message}");
+            }
         }
     }
 

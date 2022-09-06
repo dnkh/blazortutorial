@@ -19,13 +19,16 @@ namespace AzureFunctionsMarkdownFiles
     {
         [OpenApiOperation(operationId: "downloadMarkdownFile", tags: new[] { "downloadMarkdownFile" }, Summary = "Gets the markdown file", Description = "Gets the markdown file.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiParameter(name: "blobName", In = ParameterLocation.Query, Required = true, Type = typeof(string), Summary = "Name of the blob", Description = "Name of the blob.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiParameter(name: "blobName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Summary = "Name of the blob", Description = "Name of the blob.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Summary = "file", Description = "This returns the file.")]
         [FunctionName("DownloadMarkdownFile")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadMarkdownFile")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadMarkdownFile/{blobName?}")] HttpRequest req, string blobName)
         {
-            string blobName = req.Query["blobName"];
+            if (string.IsNullOrEmpty(blobName))
+            {
+                return new BadRequestObjectResult("Parameter blobName missing or empty.");
+            }
             string sasToken = Environment.GetEnvironmentVariable("SASToken");
             string accountName = Environment.GetEnvironmentVariable("AccountName");
             string containerName = Environment.GetEnvironmentVariable("ContainerName");
@@ -35,11 +38,19 @@ namespace AzureFunctionsMarkdownFiles
             CloudBlobClient blobClient = storageacc.CreateCloudBlobClient();
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
             var blobRef = container.GetBlobReference(blobName);
-            var fileStream = await blobRef.OpenReadAsync();
-            StreamReader sr = new(fileStream);
-            var filecontent = await sr.ReadToEndAsync();
 
-            return new OkObjectResult(filecontent);
+            try
+            {
+                var fileStream = await blobRef.OpenReadAsync();
+                StreamReader sr = new(fileStream);
+                var filecontent = await sr.ReadToEndAsync();
+
+                return new OkObjectResult(filecontent);
+            }
+            catch (Exception)
+            {
+                return new NotFoundObjectResult($"Could not retrieve file {blobName}.");
+            }
         }
     }
 }
