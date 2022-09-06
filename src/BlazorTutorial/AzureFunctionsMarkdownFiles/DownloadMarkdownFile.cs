@@ -8,16 +8,24 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.OpenApi.Models;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using System.Net;
 
 namespace AzureFunctionsMarkdownFiles
 {
     public static class DownloadMarkdownFile
     {
+        [OpenApiOperation(operationId: "downloadMarkdownFile", tags: new[] { "downloadMarkdownFile" }, Summary = "Gets the markdown file", Description = "Gets the markdown file.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
+        [OpenApiParameter(name: "blobName", In = ParameterLocation.Query, Required = true, Type = typeof(string), Summary = "Name of the blob", Description = "Name of the blob.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Summary = "file", Description = "This returns the file.")]
         [FunctionName("DownloadMarkdownFile")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadMarkdownFile/{blobName}")] HttpRequest req,
-            string blobName)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "DownloadMarkdownFile")] HttpRequest req)
         {
+            string blobName = req.Query["blobName"];
             string sasToken = Environment.GetEnvironmentVariable("SASToken");
             string accountName = Environment.GetEnvironmentVariable("AccountName");
             string containerName = Environment.GetEnvironmentVariable("ContainerName");

@@ -12,11 +12,18 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.OpenApi.Models;
+using System.Net;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 
 namespace AzureFunctionsMarkdownFiles
 {
     public static class GetAllMarkdownFileNames
     {
+        [OpenApiOperation(operationId: "getAllMarkdownFileNames", tags: new[] { "getAllMarkdownFileNames" }, Summary = "Gets all markdown file names", Description = "Gets all markdown file names.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(List<string>), Summary = "file names", Description = "This returns the file names.")]
         [FunctionName("GetAllMarkdownFileNames")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
