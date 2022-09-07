@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using System.Globalization;
 
-namespace BlazorTutorial.Extensions
+namespace BlazorTutorial.Language
 {
     public static class WebAssemblyHostExtension
     {
