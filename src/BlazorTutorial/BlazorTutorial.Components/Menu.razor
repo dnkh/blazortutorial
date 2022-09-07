@@ -75,7 +75,7 @@
     
     protected override async Task OnInitializedAsync()
     {
-        menuItems =  await Http.GetFromJsonAsync<MenuItem[]>("assets/menu.json");
+        menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
     }
 
     private void SetLanguage(string lang)
