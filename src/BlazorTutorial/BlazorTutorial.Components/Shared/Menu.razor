@@ -2,6 +2,8 @@
 @inject HttpClient Http
 @inject ILanguageService languageService;
 @inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager navigationManager
+
 
 <MudNavMenu>
     <MudText Typo="Typo.h6" Class="px-4">Blazor-Tutorial</MudText>
@@ -39,7 +41,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        menuItems =  await Http.GetFromJsonAsync<MenuItem[]>("assets/menu.json");
+        var uri = navigationManager.Uri;
+
+        if (uri.Contains("localhost"))
+        {
+            //local dev
+            // Important !!! : local.settings.json needed for AzureFunctionsMarkdownFiles project --> Ask M. Kempf or J. Weidmann
+            menuItems = await Http.GetFromJsonAsync<MenuItem[]>("http://localhost:7071/api/DownloadMarkdownFile/menu.json");
+        }
+        else
+        {
+            menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+        }
     }
 
     private string GetIcon(string navIcon)
