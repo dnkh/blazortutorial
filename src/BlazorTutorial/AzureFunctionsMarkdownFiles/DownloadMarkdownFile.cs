@@ -19,7 +19,7 @@ namespace AzureFunctionsMarkdownFiles
     {
         [OpenApiOperation(operationId: "downloadMarkdownFile", tags: new[] { "downloadMarkdownFile" }, Summary = "Gets the markdown file", Description = "Gets the markdown file.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiParameter(name: "blobName", In = ParameterLocation.Path, Required = true, Type = typeof(string), Summary = "Name of the blob", Description = "Name of the blob.", Visibility = OpenApiVisibilityType.Important)]
+        [OpenApiParameter(name: "blobName?", In = ParameterLocation.Path, Required = false, Type = typeof(string), Summary = "Name of the blob", Description = "Name of the blob.", Visibility = OpenApiVisibilityType.Important)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Summary = "file", Description = "This returns the file.")]
         [FunctionName("DownloadMarkdownFile")]
         public static async Task<IActionResult> Run(
