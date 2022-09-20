@@ -1,0 +1,10 @@
+@page "/markdowneditor"
+
+<MarkdownEditor @bind-Body="Body"></MarkdownEditor>
+<MarkdownViewer Body="@Body"></MarkdownViewer>
+
+
+@code {
+    public string Body { get; set; } = "";
+
+}

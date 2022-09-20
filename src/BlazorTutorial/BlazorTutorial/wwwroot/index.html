@@ -13,6 +13,41 @@
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--Hard reload on version change-->
+    <script>
+        function CheckVersionForReload() {
+            var version = localStorage["blazor-tutorial-version"];
+
+            var versionFromSite = "";
+
+            $.ajax({
+                url: '/assets/version.txt',
+                method: 'GET',
+                success: function (data) {
+                    // Set compare and set value
+                    versionFromSite = data;
+
+                    // Check vor version change
+                    if (version === undefined || version === null || version === "" || version !== versionFromSite) {
+
+                        // Set saved version
+                        localStorage["blazor-tutorial-version"] = versionFromSite;
+
+                        // Hard reload
+                        location.reload(true);
+                    }
+                },
+                fail: function () {
+                    // Hard reload
+                    location.reload(true);
+                }
+            });
+        }
+
+        CheckVersionForReload();
+    </script>
 </head>
 
 <body>
