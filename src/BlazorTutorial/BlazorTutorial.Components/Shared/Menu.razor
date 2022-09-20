@@ -42,7 +42,7 @@
     protected override async Task OnInitializedAsync()
     {
         var uri = navigationManager.Uri;
-
+@* 
         if (uri.Contains("localhost"))
         {
             //local dev
@@ -50,9 +50,9 @@
             menuItems = await Http.GetFromJsonAsync<MenuItem[]>("http://localhost:7071/api/DownloadMarkdownFile/menu.json");
         }
         else
-        {
+        { *@
             menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
-        }
+        @* } *@
     }
 
     private string GetIcon(string navIcon)

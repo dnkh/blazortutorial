@@ -15,7 +15,7 @@
             <MudButton @onclick="@(() => this.languageService.SetLanguage("de"))"> <span class="flag-icon flag-icon-deu"></span></MudButton>
         </MudButtonGroup>
         <MudIcon Icon="@Icons.Rounded.Person" Size="Size.Large"></MudIcon>
-        <MudText>@Localizer["i18n_Greeting"] @this.UserName</MudText>
+        <LoginDisplay />
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
         <Menu Lang="@this.Lang" ></Menu>
