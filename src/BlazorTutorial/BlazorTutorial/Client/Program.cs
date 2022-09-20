@@ -16,10 +16,15 @@ namespace Company.WebApplication1
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddLocalization();
 
+            builder.Services.AddMsalAuthentication(options =>
+            {
+                builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
+            });
+
             var host = builder.Build();
             await host.SetDefaultCulture();
-
             await host.RunAsync();
+
         }
     }
 }

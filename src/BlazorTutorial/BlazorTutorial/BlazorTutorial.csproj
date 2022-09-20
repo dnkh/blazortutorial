@@ -13,8 +13,7 @@
     <PackageReference Include="Markdig" Version="0.30.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="6.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+	<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.5" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="NLog" Version="5.0.1" />
