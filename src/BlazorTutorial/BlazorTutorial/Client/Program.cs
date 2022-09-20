@@ -22,10 +22,15 @@ namespace BlazorTutorial
                 TwoLetterISOLanguages = new[] { "de", "en" }
             });
 
+            builder.Services.AddMsalAuthentication(options =>
+            {
+                builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
+            });
+
             var host = builder.Build();
             await host.SetDefaultCulture();
-
             await host.RunAsync();
+
         }
     }
 }

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "blazor-tutorial": {
+      "appLocation": "bin\\Debug\\net6.0\\publish\\wwwroot",
+      "outputLocation": "."
+    }
+  }
+}
