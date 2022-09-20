@@ -1,45 +1,58 @@
 ﻿[
-  {
-    "Link": "",
-    "Text": "Home",
-    "IconName": "oi-home",
-    "Children": []
-  },
-  {
-    "Link": "gettingstarted",
-    "Text": "Getting started",
-    "IconName": "oi-play-circle",
-    "Children": []
-  },
-  {
-    "Link": "documentation",
-    "Text": "Documentation",
-    "IconName": "oi-book",
-    "Children": []
-  },
-  {
-    "Link": "components",
-    "Text": "Components",
-    "IconName": "oi-wrench",
-    "Children": [
-      {
-        "Link": "markdowneditor",
-        "Text": "Mark Down Editor",
-        "IconName": "oi-pencil",
+    {
+        "Link": "",
+        "Text": "Home",
+        "IconName": "home",
         "Children": []
-      },
-      {
-        "Link": "markdownviewer",
-        "Text": "Mark Down Viewer",
-        "IconName": "oi-magnifying-glass",
+    },
+    {
+        "Link": "gettingstarted",
+        "Text": "Getting started",
+        "IconName": "play-circle",
         "Children": []
-      }
-    ]
-  },
-  {
-    "Link": "faqs",
-    "Text": "FAQs",
-    "IconName": "oi-question-mark",
-    "Children": []
-  }
+    },
+    {
+        "Link": "documentation",
+        "Text": "Documentation",
+        "IconName": "book",
+        "Children": []
+    },
+    {
+        "Link": "components",
+        "Text": "i18n_NavMenu_MarkDown_Components",
+        "IconName": "wrench",
+        "Children": [
+            {
+                "Link": "markdowneditor",
+                "Text": "i18n_NavMenu_MarkDown_MarkDownEditor",
+                "IconName": "pencil",
+                "Children": []
+            },
+            {
+                "Link": "markdownviewer",
+                "Text": "i18n_NavMenu_MarkDown_MarkDownViewer",
+                "IconName": "assignment",
+                "Children": []
+            }
+        ]
+    },
+    {
+        "Link": "mudblazor",
+        "Text": "i18n_NavMenu_MarkDown_MudBlazor",
+        "IconName": "mudblazor",
+        "Children": [
+            {
+                "Link": "mudblazor/table",
+                "Text": "i18n_NavMenu_MarkDown_MudBlazorTable",
+                "IconName": "grid",
+                "Children": []
+            }
+        ]
+    },
+    {
+        "Link": "faqs",
+        "Text": "FAQs",
+        "IconName": "question",
+        "Children": []
+    }
 ]

@@ -1,0 +1,72 @@
+﻿
+@inject HttpClient Http
+@inject ILanguageService languageService;
+@inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager navigationManager
+
+
+<MudNavMenu>
+    <MudText Typo="Typo.h6" Class="px-4">Blazor-Tutorial</MudText>
+    <MudDivider Class="my-2"/>
+    @if (menuItems != null)
+    {
+        @foreach (var menuItem in menuItems)
+        {
+            @if (menuItem.Children.Any())
+            {
+                <MudNavGroup Title="@Localizer[menuItem.Text]" Expanded="false" Icon="@this.GetIcon(menuItem.IconName)">
+                    @foreach (var childMenuItem in menuItem.Children)
+                    {
+                        <MudNavLink Href="@this.languageService.GetLanguageUrl(this.Lang, childMenuItem.Link)" Match="NavLinkMatch.All" Icon="@this.GetIcon(childMenuItem.IconName)">
+                             @Localizer[childMenuItem.Text]
+                        </MudNavLink>
+                    }
+                </MudNavGroup>
+            }
+            else
+            {
+                <MudNavLink Href="@this.languageService.GetLanguageUrl(this.Lang, menuItem.Link)" Match="NavLinkMatch.Prefix" Icon="@this.GetIcon(menuItem.IconName)">
+                    @Localizer[menuItem.Text]
+                </MudNavLink>
+            }
+        }
+    }
+</MudNavMenu>
+
+@code {
+    [Parameter]
+    public string Lang { get; set; }
+
+    private MenuItem[] menuItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = navigationManager.Uri;
+@* 
+        if (uri.Contains("localhost"))
+        {
+            //local dev
+            // Important !!! : local.settings.json needed for AzureFunctionsMarkdownFiles project --> Ask M. Kempf or J. Weidmann
+            menuItems = await Http.GetFromJsonAsync<MenuItem[]>("http://localhost:7071/api/DownloadMarkdownFile/menu.json");
+        }
+        else
+        { *@
+            menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+        @* } *@
+    }
+
+    private string GetIcon(string navIcon)
+        => navIcon switch
+        {
+            "wrench" => Icons.Filled.Build,
+            "pencil" => Icons.Filled.Edit,
+            "assignment" => Icons.Filled.Assignment,
+            "mudblazor" => Icons.Custom.Brands.MudBlazor,
+            "grid" => Icons.Filled.GridOn,
+            "question" => Icons.Filled.QuestionMark,
+            "book" => Icons.Filled.Book,
+            "play-circle" => Icons.Filled.PlayCircle,
+            "home" => Icons.Filled.Home,
+            _ => string.Empty
+        };
+}

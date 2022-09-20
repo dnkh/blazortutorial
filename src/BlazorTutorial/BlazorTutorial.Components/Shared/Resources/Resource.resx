@@ -117,7 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="i18n_Test" xml:space="preserve">
-    <value>Hello World</value>
+  <data name="i18n_Greeting" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_Header_MolarMass" xml:space="preserve">
+    <value>Molar mass</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_Header_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_Header_Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_Header_Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_Header_Sign" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_RowsPerPage" xml:space="preserve">
+    <value>Item per page</value>
+  </data>
+  <data name="i18n_MudBlazor_Table_Title" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="i18n_NavMenu_MarkDown_Components" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="i18n_NavMenu_MarkDown_MarkDownEditor" xml:space="preserve">
+    <value>Mark Down Editor</value>
+  </data>
+  <data name="i18n_NavMenu_MarkDown_MarkDownViewer" xml:space="preserve">
+    <value>Mark Down Viewer</value>
+  </data>
+  <data name="i18n_NavMenu_MarkDown_MudBlazor" xml:space="preserve">
+    <value>MudBlazor</value>
+  </data>
+  <data name="i18n_NavMenu_MarkDown_MudBlazorTable" xml:space="preserve">
+    <value>Table</value>
   </data>
 </root>
