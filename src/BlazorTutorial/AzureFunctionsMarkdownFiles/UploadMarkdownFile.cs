@@ -25,16 +25,9 @@ namespace AzureFunctionsMarkdownFiles
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req)
         {
-            try
+            if (!req.HasFormContentType || req.Form.Files.Count != 1)
             {
-                if (req.Form.Files.Count != 1)
-                {
-                    return new BadRequestObjectResult($"Expected 1 file in request but found {req.Form.Files.Count}.");
-                }
-            }
-            catch (Exception)
-            {
-                return new BadRequestObjectResult("Parameter File is missing.");
+                return new BadRequestObjectResult($"Expected 1 file in request but found {(!req.HasFormContentType ? 0 : req.Form.Files.Count)}.");
             }
 
             var file = req.Form.Files[0];
