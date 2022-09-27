@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="i18n_Always_Last_Active_Site" xml:space="preserve">
+    <value>On start up the last active page will be loaded always</value>
+  </data>
+  <data name="i18n_Get_Details" xml:space="preserve">
+    <value>Get details</value>
+  </data>
   <data name="i18n_Greeting" xml:space="preserve">
     <value>Hello</value>
+  </data>
+  <data name="i18n_Hide_Loading_Animation" xml:space="preserve">
+    <value>Hide loading animation</value>
   </data>
   <data name="i18n_MudBlazor_Table_Header_MolarMass" xml:space="preserve">
     <value>Molar mass</value>
@@ -155,5 +164,14 @@
   </data>
   <data name="i18n_NavMenu_MarkDown_MudBlazorTable" xml:space="preserve">
     <value>Table</value>
+  </data>
+  <data name="i18n_Notification_Example" xml:space="preserve">
+    <value>Notification example via centralized state</value>
+  </data>
+  <data name="i18n_Show_Loading_Animation" xml:space="preserve">
+    <value>Show loading animation</value>
+  </data>
+  <data name="i18n_Show_Notification" xml:space="preserve">
+    <value>Show notification</value>
   </data>
 </root>

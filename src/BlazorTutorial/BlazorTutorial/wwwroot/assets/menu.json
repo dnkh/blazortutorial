@@ -1,58 +1,74 @@
 ﻿[
-    {
-        "Link": "",
-        "Text": "Home",
-        "IconName": "home",
+  {
+    "Link": "",
+    "Text": "Home",
+    "IconName": "home",
+    "MarkDownFileName": "",
+    "Children": []
+  },
+  {
+    "Link": "genericmarkdowneditor",
+    "Text": "Getting started",
+    "IconName": "play-circle",
+    "MarkDownFileName": "FirstMarkdown.txt",
+    "Children": []
+  },
+  {
+    "Link": "notExisting",
+    "Text": "Documentation",
+    "IconName": "book",
+    "MarkDownFileName": "",
+    "Children": []
+  },
+  {
+    "Link": "components",
+    "Text": "i18n_NavMenu_MarkDown_Components",
+    "IconName": "wrench",
+    "MarkDownFileName": "",
+    "Children": [
+      {
+        "Link": "markdowneditor",
+        "Text": "i18n_NavMenu_MarkDown_MarkDownEditor",
+        "IconName": "pencil",
+        "MarkDownFileName": "",
         "Children": []
-    },
-    {
-        "Link": "gettingstarted",
-        "Text": "Getting started",
-        "IconName": "play-circle",
+      },
+      {
+        "Link": "markdownviewer",
+        "Text": "i18n_NavMenu_MarkDown_MarkDownViewer",
+        "IconName": "assignment",
+        "MarkDownFileName": "",
         "Children": []
-    },
-    {
-        "Link": "documentation",
-        "Text": "Documentation",
-        "IconName": "book",
+      }
+    ]
+  },
+  {
+    "Link": "mudblazor",
+    "Text": "i18n_NavMenu_MarkDown_MudBlazor",
+    "IconName": "mudblazor",
+    "MarkDownFileName": "",
+    "Children": [
+      {
+        "Link": "mudblazor/table",
+        "Text": "i18n_NavMenu_MarkDown_MudBlazorTable",
+        "IconName": "grid",
+        "MarkDownFileName": "",
         "Children": []
-    },
-    {
-        "Link": "components",
-        "Text": "i18n_NavMenu_MarkDown_Components",
-        "IconName": "wrench",
-        "Children": [
-            {
-                "Link": "markdowneditor",
-                "Text": "i18n_NavMenu_MarkDown_MarkDownEditor",
-                "IconName": "pencil",
-                "Children": []
-            },
-            {
-                "Link": "markdownviewer",
-                "Text": "i18n_NavMenu_MarkDown_MarkDownViewer",
-                "IconName": "assignment",
-                "Children": []
-            }
-        ]
-    },
-    {
-        "Link": "mudblazor",
-        "Text": "i18n_NavMenu_MarkDown_MudBlazor",
-        "IconName": "mudblazor",
-        "Children": [
-            {
-                "Link": "mudblazor/table",
-                "Text": "i18n_NavMenu_MarkDown_MudBlazorTable",
-                "IconName": "grid",
-                "Children": []
-            }
-        ]
-    },
-    {
-        "Link": "faqs",
-        "Text": "FAQs",
-        "IconName": "question",
-        "Children": []
-    }
+      }
+    ]
+  },
+  {
+    "Link": "notExisting",
+    "Text": "FAQs",
+    "IconName": "question",
+    "MarkDownFileName": "",
+    "Children": []
+  },
+  {
+    "Link": "http://localhost:7071/api/swagger/ui",
+    "Text": "Azure functions",
+    "IconName": "functions",
+    "MarkDownFileName": "",
+    "Children": []
+  }
 ]

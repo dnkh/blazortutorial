@@ -1,17 +1,50 @@
 ﻿@page "/"
 @page "/{lang}/index"
 @page "/{lang}"
+@using BlazorTutorial.Core.StateHandling
 
 @inject IStringLocalizer<Resource> Localizer
-
+@inject ApplicationState ApplicationState
+ 
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<br />
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="ShowLoadingAnimation">@Localizer["i18n_Show_Loading_Animation"]</MudButton>
+<br />
+<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
+
+<br />
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="ShowNotification">@Localizer["i18n_Show_Notification"]</MudButton>
+<br />
+<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
+
+
+<br />
+<br />
+@Localizer["i18n_Always_Last_Active_Site"]
+<br />
+<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
 
 @code {
+    [CascadingParameter]
+    public Action<bool> ChangeLoaderVisibilityAction { get; set; }
+
     [Parameter]  
     public string Lang { get; set; }
+
+    protected void ShowLoadingAnimation()
+    {
+        ChangeLoaderVisibilityAction(true);
+    }
+
+    protected void ShowNotification()
+    {
+        ApplicationState.GlobalNotification.Add(@Localizer["i18n_Notification_Example"]);
+    }
 }

@@ -6,7 +6,12 @@
 
 
 <MudNavMenu>
-    <MudText Typo="Typo.h6" Class="px-4">Blazor-Tutorial</MudText>
+    <MudText Typo="Typo.h6" Class="px-4">
+        Blazor-Tutorial
+    </MudText>
+    <MudText  Class="px-4">
+        @version
+    </MudText>
     <MudDivider Class="my-2"/>
     @if (menuItems != null)
     {
@@ -17,7 +22,11 @@
                 <MudNavGroup Title="@Localizer[menuItem.Text]" Expanded="false" Icon="@this.GetIcon(menuItem.IconName)">
                     @foreach (var childMenuItem in menuItem.Children)
                     {
-                        <MudNavLink Href="@this.languageService.GetLanguageUrl(this.Lang, childMenuItem.Link)" Match="NavLinkMatch.All" Icon="@this.GetIcon(childMenuItem.IconName)">
+                        var url = childMenuItem.Link.Contains("http") ? childMenuItem.Link : languageService.GetLanguageUrl(this.Lang, childMenuItem.Link);
+
+                        url = !string.IsNullOrWhiteSpace(childMenuItem.MarkDownFileName) ? $"{languageService.GetLanguageUrl(this.Lang, "genericmarkdowneditor")}?markdownName={childMenuItem.MarkDownFileName}" : url;
+
+                        <MudNavLink Href="@url" Match="NavLinkMatch.All" Icon="@this.GetIcon(childMenuItem.IconName)">
                              @Localizer[childMenuItem.Text]
                         </MudNavLink>
                     }
@@ -25,7 +34,11 @@
             }
             else
             {
-                <MudNavLink Href="@this.languageService.GetLanguageUrl(this.Lang, menuItem.Link)" Match="NavLinkMatch.Prefix" Icon="@this.GetIcon(menuItem.IconName)">
+                var url = menuItem.Link.Contains("http") ? menuItem.Link : languageService.GetLanguageUrl(this.Lang, menuItem.Link);
+
+                url = !string.IsNullOrWhiteSpace(menuItem.MarkDownFileName) ? $"{languageService.GetLanguageUrl(this.Lang, "genericmarkdowneditor")}?markdownName={menuItem.MarkDownFileName}" : url;
+
+                <MudNavLink Href="@url" ForceLoad="true" Match="NavLinkMatch.Prefix" Icon="@this.GetIcon(menuItem.IconName)">
                     @Localizer[menuItem.Text]
                 </MudNavLink>
             }
@@ -39,20 +52,13 @@
 
     private MenuItem[] menuItems;
 
+    private string version;
+
     protected override async Task OnInitializedAsync()
     {
-        var uri = navigationManager.Uri;
-@* 
-        if (uri.Contains("localhost"))
-        {
-            //local dev
-            // Important !!! : local.settings.json needed for AzureFunctionsMarkdownFiles project --> Ask M. Kempf or J. Weidmann
-            menuItems = await Http.GetFromJsonAsync<MenuItem[]>("http://localhost:7071/api/DownloadMarkdownFile/menu.json");
-        }
-        else
-        { *@
-            menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
-        @* } *@
+        version = await Http.GetStringAsync("assets/version.txt");
+
+        menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
     }
 
     private string GetIcon(string navIcon)
@@ -67,6 +73,7 @@
             "book" => Icons.Filled.Book,
             "play-circle" => Icons.Filled.PlayCircle,
             "home" => Icons.Filled.Home,
+            "functions" => Icons.Filled.Bolt,
             _ => string.Empty
         };
 }

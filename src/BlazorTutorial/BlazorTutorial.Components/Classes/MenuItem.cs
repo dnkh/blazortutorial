@@ -13,6 +13,8 @@
 
         public string IconName { get; set; }
 
+        public string MarkDownFileName { get; set; }
+
         public List<MenuItem> Children { get; set; }
     }
 }

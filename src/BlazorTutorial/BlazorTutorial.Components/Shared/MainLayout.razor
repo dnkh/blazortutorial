@@ -1,6 +1,9 @@
-﻿@inherits LayoutComponentBase
+﻿@using BlazorTutorial.Core.Services
+@inherits LayoutComponentBase
 @inject ILanguageService languageService;
 @inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager NavigationManager
+@inject ICookieService CookieService
 
 <MudThemeProvider IsDarkMode="true" Theme="_theme" />
 <MudDialogProvider />
@@ -17,13 +20,25 @@
         <MudIcon Icon="@Icons.Rounded.Person" Size="Size.Large"></MudIcon>
         <LoginDisplay />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
-        <Menu Lang="@this.Lang" ></Menu>
+    <MudDrawer @bind-Open="drawerOpen" Elevation="1">
+        <Menu Lang="@this.Lang"></Menu>
     </MudDrawer>
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-2 pt-2">
-            @Body
-        </MudContainer>
+        <CascadingValue Value="@ChangeLoaderVisibility" TValue="Action<bool>" IsFixed="true">
+            <MudOverlay @bind-Visible="isLoadingAnimationVisible" DarkBackground="true" ZIndex="9999" AutoClose="false">
+                <MudGrid>
+                    <MudItem xs="12" Class="text-center">
+                        <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+                    </MudItem>
+                    <MudItem xs="12" Class="text-center">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(e => ChangeLoaderVisibility(false))">@Localizer["i18n_Hide_Loading_Animation"]</MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudOverlay>
+            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-2 pt-2">
+                @Body
+            </MudContainer>
+        </CascadingValue>
     </MudMainContent>
 </MudLayout>
 
@@ -34,11 +49,37 @@
 
     public string UserName { get; set; } = "Themenarbeitsunterstützer";
 
-    bool _drawerOpen = true;
+    private bool drawerOpen = true;
 
-    protected override void OnInitialized()
+    private bool isLoadingAnimationVisible = false;
+
+    private string _lastVisitedPageKey = "BlazorTutorial.Last.Visited.Page";
+
+    protected override async Task OnInitializedAsync()
     {
         this.Lang = this.languageService.GetUriLanguage();
+
+        var lastVisitedPage = await CookieService.GetValue(_lastVisitedPageKey);
+
+        if (!string.IsNullOrWhiteSpace(lastVisitedPage))
+        {
+            NavigationManager.NavigateTo(lastVisitedPage);
+        }
+
+        NavigationManager.LocationChanged += LocationChanged;
+
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        CookieService.SetValue(_lastVisitedPageKey, e.Location);
+    }
+
+    public void ChangeLoaderVisibility(bool visible)
+    {
+        isLoadingAnimationVisible = visible;
+
+        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -58,6 +99,7 @@
 
     private void DrawerToggle()
     {
-        _drawerOpen = !_drawerOpen;
+        drawerOpen = !drawerOpen;
     }
+
 }

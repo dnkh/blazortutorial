@@ -61,11 +61,38 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On start up the last active page will be loaded always.
+        /// </summary>
+        public static string i18n_Always_Last_Active_Site {
+            get {
+                return ResourceManager.GetString("i18n_Always_Last_Active_Site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get details.
+        /// </summary>
+        public static string i18n_Get_Details {
+            get {
+                return ResourceManager.GetString("i18n_Get_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         public static string i18n_Greeting {
             get {
                 return ResourceManager.GetString("i18n_Greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide loading animation.
+        /// </summary>
+        public static string i18n_Hide_Loading_Animation {
+            get {
+                return ResourceManager.GetString("i18n_Hide_Loading_Animation", resourceCulture);
             }
         }
         
@@ -174,6 +201,33 @@ namespace BlazorTutorial.Components.Shared.Resources {
         public static string i18n_NavMenu_MarkDown_MudBlazorTable {
             get {
                 return ResourceManager.GetString("i18n_NavMenu_MarkDown_MudBlazorTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification example via centralized state.
+        /// </summary>
+        public static string i18n_Notification_Example {
+            get {
+                return ResourceManager.GetString("i18n_Notification_Example", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show loading animation.
+        /// </summary>
+        public static string i18n_Show_Loading_Animation {
+            get {
+                return ResourceManager.GetString("i18n_Show_Loading_Animation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show notification.
+        /// </summary>
+        public static string i18n_Show_Notification {
+            get {
+                return ResourceManager.GetString("i18n_Show_Notification", resourceCulture);
             }
         }
     }
