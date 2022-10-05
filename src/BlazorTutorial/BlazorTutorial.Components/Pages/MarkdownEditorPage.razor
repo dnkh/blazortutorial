@@ -1,11 +1,57 @@
 @page "/{Lang}/markdowneditor"
 
+@using BlazorTutorial.Core.StateHandling
+@inject IStringLocalizer<Resource> Localizer
+@inject ApplicationState ApplicationState
+@inject HttpClient Http
+
+
 <MarkdownEditor @bind-Body="Body"></MarkdownEditor>
+
 <MarkdownViewer Body="@Body"></MarkdownViewer>
+
+<br />
+<MudTextField @bind-Value="path" Label="@Localizer["i18n_Menu_Path"]" Variant="Variant.Text"></MudTextField>
+<br />
+<MudTextField @bind-Value="filename" Label="@Localizer["i18n_Mark_Down_Name"]" Variant="Variant.Text"></MudTextField>
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="Save">@Localizer["i18n_Save"]</MudButton>
 
 @code {
     [Parameter]
     public string Lang{ get; set; }
 
     public string Body { get; set; } = "";
+
+    private string path;
+
+    private string filename;
+
+    protected async Task Save()
+    {
+        //var  menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        //var pathParts = path.Split('/');
+
+        //foreach (var pathPart in pathParts)
+        //{
+        //    var existingMenuItem = menuItems.FirstOrDefault(m => m.Link == pathPart);
+            
+        //    if (existingMenuItem != null)
+        //    {
+        //        existingMenuItem.MarkDownFileName = filename;
+        //    }
+        //    else
+        //    {
+        //        var itemList = menuItems.ToList();
+
+        //        itemList.Add(new MenuItem
+        //                         {
+
+        //                         });
+        //    }
+        //}
+
+        ApplicationState.GlobalNotification.Add($"{@Localizer["i18n_Saved_Successfully"]} - {path} - {filename}");
+    }
 }

@@ -129,6 +129,12 @@
   <data name="i18n_Hide_Loading_Animation" xml:space="preserve">
     <value>Verberge Ladeanimation</value>
   </data>
+  <data name="i18n_Mark_Down_Name" xml:space="preserve">
+    <value>Markdown Dateiname (inkl. Endung)</value>
+  </data>
+  <data name="i18n_Menu_Path" xml:space="preserve">
+    <value>Menupfad (Trennung durch Slash)</value>
+  </data>
   <data name="i18n_MudBlazor_Table_Header_MolarMass" xml:space="preserve">
     <value>Molmasse</value>
   </data>
@@ -167,6 +173,12 @@
   </data>
   <data name="i18n_Notification_Example" xml:space="preserve">
     <value>Benachrichtigungsbeispiel über zentralen State</value>
+  </data>
+  <data name="i18n_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="i18n_Saved_Successfully" xml:space="preserve">
+    <value>Erfolgreich gespeichert</value>
   </data>
   <data name="i18n_Show_Loading_Animation" xml:space="preserve">
     <value>Zeige Ladeanimation</value>

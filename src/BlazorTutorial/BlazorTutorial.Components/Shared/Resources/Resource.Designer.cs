@@ -97,6 +97,24 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Markdown filename (inkl. extension).
+        /// </summary>
+        public static string i18n_Mark_Down_Name {
+            get {
+                return ResourceManager.GetString("i18n_Mark_Down_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menupath (Devided by Slash).
+        /// </summary>
+        public static string i18n_Menu_Path {
+            get {
+                return ResourceManager.GetString("i18n_Menu_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Molar mass.
         /// </summary>
         public static string i18n_MudBlazor_Table_Header_MolarMass {
@@ -210,6 +228,24 @@ namespace BlazorTutorial.Components.Shared.Resources {
         public static string i18n_Notification_Example {
             get {
                 return ResourceManager.GetString("i18n_Notification_Example", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string i18n_Save {
+            get {
+                return ResourceManager.GetString("i18n_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully saved.
+        /// </summary>
+        public static string i18n_Saved_Successfully {
+            get {
+                return ResourceManager.GetString("i18n_Saved_Successfully", resourceCulture);
             }
         }
         
