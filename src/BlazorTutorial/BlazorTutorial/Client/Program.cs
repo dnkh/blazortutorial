@@ -1,3 +1,4 @@
+using BlazorTutorial.Components;
 using BlazorTutorial.Language;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -21,6 +22,8 @@ namespace BlazorTutorial
                 TwoLetterISODefaultLanguage = "de",
                 TwoLetterISOLanguages = new[] { "de", "en" }
             });
+            builder.Services.AddHttpClient();
+            builder.Services.AddMarkdownViewerService();
 
             builder.Services.AddMsalAuthentication(options =>
             {
