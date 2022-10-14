@@ -15,11 +15,6 @@ namespace BlazorTutorial.Components
                 var configuration = provider.GetRequiredService<IConfiguration>();
                 client.BaseAddress = new Uri("http://localhost:7071");
                 client.Timeout = TimeSpan.FromSeconds(30);
-                //var username = configuration.GetValue<string>("Client:Username");
-                //var password = configuration.GetValue<string>("Client:Password");
-                //var authorizationHeaderValue = $"{username}:{password}";
-                //var base64Encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(authorizationHeaderValue));
-                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64Encoded);
             });
             return services;
         }
