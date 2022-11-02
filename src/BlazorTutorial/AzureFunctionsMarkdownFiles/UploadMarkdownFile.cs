@@ -30,6 +30,11 @@ namespace AzureFunctionsMarkdownFiles
                 return new BadRequestObjectResult($"Expected 1 file in request but found {(!req.HasFormContentType ? 0 : req.Form.Files.Count)}.");
             }
 
+            if (req.Form.Files[0].Name != "File")
+            {
+                return new BadRequestObjectResult($"Expected formdata key to be \"File\" but found \"{req.Form.Files[0].Name}\".");
+            }
+
             var file = req.Form.Files[0];
             string sasToken = Environment.GetEnvironmentVariable("SASToken");
             string accountName = Environment.GetEnvironmentVariable("AccountName");

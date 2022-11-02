@@ -64,6 +64,14 @@
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 
+    <script>
+        window.saveFile = (FileName, Content) => {
+            var data = new FormData();
+            data.append("File", new Blob([Content], { type: "text/plain" }),FileName);
+            //fetch("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", { method: "POST", body: data });
+            fetch("http://localhost:7071/api/UploadMarkdownFile", { method: "POST", body: data });
+        };
+    </script>
 
     <script>
         window.blazorCulture = {

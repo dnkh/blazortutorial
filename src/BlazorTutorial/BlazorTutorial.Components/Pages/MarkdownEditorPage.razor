@@ -1,11 +1,10 @@
 @page "/{Lang}/markdowneditor"
+@inject IJSRuntime JS
 
-<MarkdownEditor @bind-Body="Body"></MarkdownEditor>
-<MarkdownViewer Body="@Body"></MarkdownViewer>
+<MarkdownEditor></MarkdownEditor>
+
 
 @code {
     [Parameter]
-    public string Lang{ get; set; }
-
-    public string Body { get; set; } = "";
+    public string Lang { get; set; }
 }
