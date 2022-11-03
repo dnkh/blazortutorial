@@ -1,4 +1,4 @@
-@inject IJSRuntime JS
+@inject HttpClient http
 
 <div class="row">
     <div class="col-6">
@@ -15,7 +15,11 @@
 
     public async Task SaveFile()
     {
-        await JS.InvokeVoidAsync("saveFile", FileName+".md", Body);
+        MultipartFormDataContent content = new MultipartFormDataContent();
+        var fileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(Body));
+        content.Add(fileContent, "File", $"{FileName}.md");
+        content.Add(fileContent, "File", $"{FileName}2.md");
+        await http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
     }
 
 }
