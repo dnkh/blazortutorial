@@ -1,3 +1,4 @@
+using BlazorTutorial.Components;
 using BlazorTutorial.Language;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -26,6 +27,8 @@ namespace BlazorTutorial
             builder.Services.AddMudServices(config =>
                 {
                     config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            builder.Services.AddHttpClient();
+            builder.Services.AddMarkdownViewerService();
 
                     config.SnackbarConfiguration.PreventDuplicates = false;
                     config.SnackbarConfiguration.NewestOnTop = false;

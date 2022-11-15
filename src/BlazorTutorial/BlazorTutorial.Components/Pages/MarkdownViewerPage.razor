@@ -1,5 +1,6 @@
 ﻿@page "/{lang}/markdownviewer"
-
+@inject HttpClient Http
+@using BlazorTutorial.Components.Services
 
 <PageTitle>MarkdownViewer</PageTitle>
 <MarkdownViewer Body="@MarkdownText"></MarkdownViewer>
@@ -7,7 +8,22 @@
 <MarkdownViewer Body="@MarkdownText3"></MarkdownViewer>
 <MarkdownViewer Body="@MarkdownText4"></MarkdownViewer>
 <MarkdownViewer Body="@MarkdownText1"></MarkdownViewer>
-
+<button style="background-color:chocolate" onclick=@(async () => await GetAllFiles())>All Markdown Files</button>
+@if (Files == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+<ul>
+    @foreach (var item in Files)
+    {
+        <li>
+            @item
+        </li>
+    }
+</ul>
+}
 @code
 {
     [Parameter]
@@ -18,4 +34,13 @@
     public string MarkdownText2 { get; set; } = "- Hallo Welt";
     public string MarkdownText3 { get; set; } = "'''Hallo Welt'''";
     public string MarkdownText4 { get; set; } = "<Hallo Welt>";
+
+    private List<string> Files { get; set; }
+
+    private async Task GetAllFiles()
+    {
+        var viewer = new MarkdownViewerService(Http);
+        var Files = await viewer.GetAllMarkdownFileNames();
+        Console.WriteLine(Files);
+    }
 }
