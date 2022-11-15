@@ -1,22 +1,25 @@
+@inject HttpClient http
+
 <div class="row">
     <div class="col-6">
-        <textarea class="form-control" value="@Body" @oninput="ChangeValueAsync">
-        </textarea>
+        <MudTextField @bind-Value="FileName" Label="File name" Variant="Variant.Text"></MudTextField>
+        <MudTextField T="string" Label="Markdown text" Variant="Variant.Text" @bind-Value="Body" Lines="5" />
+        <MudButton Variant="Variant.Filled" @onclick="SaveFile">Save!</MudButton>
     </div>
 </div>
 
 @code {
     [Parameter]
     public string Body { get; set; } = "";
+    public string FileName { get; set; } = "";
 
-    [Parameter]
-    public EventCallback<string> BodyChanged { get; set; }
-
-    private async Task ChangeValueAsync(ChangeEventArgs e)
+    public async Task SaveFile()
     {
-        Body = e.Value.ToString();
-
-        await BodyChanged.InvokeAsync(Body);
+        MultipartFormDataContent content = new MultipartFormDataContent();
+        var fileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(Body));
+        content.Add(fileContent, "File", $"{FileName}.md");
+        content.Add(fileContent, "File", $"{FileName}2.md");
+        await http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
     }
 
 }

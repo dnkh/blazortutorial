@@ -1,4 +1,5 @@
 @page "/{Lang}/markdowneditor"
+@inject IJSRuntime JS
 
 @using BlazorTutorial.Core.StateHandling
 @inject IStringLocalizer<Resource> Localizer
@@ -19,9 +20,7 @@
 
 @code {
     [Parameter]
-    public string Lang{ get; set; }
-
-    public string Body { get; set; } = "";
+    public string Lang { get; set; }
 
     private string path;
 
