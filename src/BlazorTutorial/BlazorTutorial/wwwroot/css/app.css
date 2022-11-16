@@ -62,3 +62,20 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.mark-down-viewer {
+    height: 300px;
+    border: 1px solid grey;
+}
+
+.childGrid {
+    margin-left: 50px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 165%;
+}
+
+.mud-table-foot {
+    display: none;
+}

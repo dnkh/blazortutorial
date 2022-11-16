@@ -1,5 +1,6 @@
 ﻿@page "/{lang}/markdownviewer"
 @inject HttpClient Http
+@inject IStringLocalizer<Resource> Localizer
 @using BlazorTutorial.Components.Services
 
 <PageTitle>MarkdownViewer</PageTitle>
@@ -8,15 +9,19 @@
 <MarkdownViewer Body="@MarkdownText3"></MarkdownViewer>
 <MarkdownViewer Body="@MarkdownText4"></MarkdownViewer>
 <MarkdownViewer Body="@MarkdownText1"></MarkdownViewer>
-<button style="background-color:chocolate" onclick=@(async () => await GetAllFiles())>All Markdown Files</button>
-@if (Files == null)
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="GetAllFiles">@Localizer["i18n_Button_Load"]</MudButton>
+<br />
+<br />
+
+@if (!files.Any())
 {
-    <p><em>Loading...</em></p>
+    <p><em>@Localizer["i18n_Press_Button_Load"]</em></p>
 }
 else
 {
 <ul>
-    @foreach (var item in Files)
+    @foreach (var item in files)
     {
         <li>
             @item
@@ -35,12 +40,13 @@ else
     public string MarkdownText3 { get; set; } = "'''Hallo Welt'''";
     public string MarkdownText4 { get; set; } = "<Hallo Welt>";
 
-    private List<string> Files { get; set; }
+    private List<string> files = new List<string>();
 
     private async Task GetAllFiles()
     {
         var viewer = new MarkdownViewerService(Http);
-        var Files = await viewer.GetAllMarkdownFileNames();
-        Console.WriteLine(Files);
+
+        files = await viewer.GetAllMarkdownFileNames();
+
     }
 }

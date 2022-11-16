@@ -11,6 +11,10 @@
 @code {
     [Parameter]
     public string Body { get; set; } = "";
+
+    [Parameter]
+    public EventCallback<string> BodyChanged { get; set; }
+
     public string FileName { get; set; } = "";
 
     public async Task SaveFile()

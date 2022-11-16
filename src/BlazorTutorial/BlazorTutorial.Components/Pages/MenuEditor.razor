@@ -1,0 +1,153 @@
+﻿@page "/{Lang}/menueditor"
+@using System.Text.RegularExpressions
+@using System.Web
+@using BlazorTutorial.Core.StateHandling
+@using System.Text.Json
+
+@inject IStringLocalizer<Resource> Localizer
+@inject ApplicationState ApplicationState
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Menu Editor</h3>
+
+<p>@Localizer["i18n_Menu_Editor_Description"]</p>
+
+<MudExpansionPanels>
+    <MudExpansionPanel Text="@Localizer["i18n_Actual_Menu"]">
+        <pre>
+            @((MarkupString)menuItemsJsonStringFormatted)
+</pre>    </MudExpansionPanel>
+</MudExpansionPanels>
+<br />
+<p>@Localizer["i18n_Choose_Items_To_Delete"]</p>
+<MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="Delete">@Localizer["i18n_Delete"]</MudButton>
+<br />
+<br />
+<MudDataGrid T="MenuItem" Items="@items" MultiSelection="true" SelectedItemsChanged="SelectedItemChangedParent">
+    <Columns>
+        <SelectColumn T="MenuItem"/>
+        <Column T="MenuItem" Field="Link" />
+        <Column T="MenuItem" Field="Text"/>
+        <Column T="MenuItem" Field="MarkDownFileName"/>
+        <Column T="MenuItem" Field="Identifier" Hidden="true"/>
+    </Columns>
+    <ChildRowContent>
+        @if(@context.Item.Children.Any()){
+            <div class="childGrid" colspan="4">
+                <h6>Childs of @context.Item.Link</h6>
+                <MudDataGrid T="MenuItem" Items="@context.Item.Children" MultiSelection="true" SelectedItemsChanged="SelectedItemChangedChild">
+                    <Columns>
+                        <SelectColumn T="MenuItem"/>
+                        <Column T="MenuItem" Field="Link"/>
+                        <Column T="MenuItem" Field="Text"/>
+                        <Column T="MenuItem" Field="MarkDownFileName"/>
+                        <Column T="MenuItem" Field="Identifier" Hidden="true"/>
+                    </Columns>
+                </MudDataGrid>
+            </div>
+        }
+    </ChildRowContent>
+</MudDataGrid>
+
+
+@code {
+    [Parameter]
+    public string Lang{ get; set; }
+
+    private List<MenuItem> items;
+
+    private string menuItemsJsonStringFormatted;
+
+    private HashSet<MenuItem> selectedItemsParent = new HashSet<MenuItem>();
+
+    private HashSet<MenuItem> selectedItemsChild = new HashSet<MenuItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var menuItemsJsonString = await Http.GetStringAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        menuItemsJsonStringFormatted = Regex.Replace(HttpUtility.HtmlEncode(@menuItemsJsonString), "\r?\n|\r", "<br />");
+
+        var menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        items = menuItems.ToList();
+
+        await base.OnInitializedAsync();
+    }
+
+    protected async Task Delete()
+    {
+        var parentIdentifiers = selectedItemsParent.Select(s => s.Identifier).ToList();
+
+        var childIdentifiers = selectedItemsChild.Select(s => s.Identifier).ToList();
+
+        var parentsToRemove = new List<MenuItem>();
+
+        var childsToRemove = new List<ChildMenuItemToDelete>();
+
+        foreach (var item in items)
+        {
+            if (item.Children.Any())
+            {
+                foreach (var itemChild in item.Children)
+                {
+                    if (childIdentifiers.Any(i => i == itemChild.Identifier))
+                    {
+                        childsToRemove.Add(new ChildMenuItemToDelete
+                                               {
+                                                   MenuItem = itemChild,
+                                                   ParentIdentifier = item.Identifier
+                                               });
+                    }
+                }
+            }
+
+            if (parentIdentifiers.Any(i => i == item.Identifier))
+            {
+                parentsToRemove.Add(item);
+            }
+        }
+
+        foreach (var item in items)
+        {
+            if (childsToRemove.Any(c => c.ParentIdentifier == item.Identifier))
+            {
+                var childs = childsToRemove.Where(c => c.ParentIdentifier == item.Identifier).Select(c => c.MenuItem).ToList();
+
+                var newChildren = item.Children.Except(childs).ToList();
+
+                item.Children = newChildren;
+            }
+        }
+
+        items = items.Except(parentsToRemove).ToList();
+
+        var json = JsonSerializer.Serialize(items);
+
+        var content = new MultipartFormDataContent();
+
+        var fileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(json));
+
+        content.Add(fileContent, "File", "menu.json");
+
+        await Http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
+
+        ApplicationState.GlobalNotification.Add(Localizer["i18n_Deleted_Successfully"]);
+           
+        await Task.Delay(1500);
+
+        NavigationManager.NavigateTo("menueditor", true);
+    }
+
+    private void SelectedItemChangedParent(HashSet<MenuItem> items)
+    {
+        selectedItemsParent = items;
+    }
+
+    private void SelectedItemChangedChild(HashSet<MenuItem> items)
+    {
+        selectedItemsChild = items;
+    }
+
+}

@@ -16,5 +16,7 @@
         public string MarkDownFileName { get; set; }
 
         public List<MenuItem> Children { get; set; }
+
+        public string Identifier { get; set; }
     }
 }

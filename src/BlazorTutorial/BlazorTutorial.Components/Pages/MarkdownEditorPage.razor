@@ -2,15 +2,23 @@
 @inject IJSRuntime JS
 
 @using BlazorTutorial.Core.StateHandling
+@using Markdig
+@using System.Text.RegularExpressions
+@using System.Web
+@using System.Text.Json
 @inject IStringLocalizer<Resource> Localizer
 @inject ApplicationState ApplicationState
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 
+<MudTextField T="string" Label="Markdown text" Variant="Variant.Text" @bind-Value="Body" Lines="5" />
 
-<MarkdownEditor @bind-Body="Body"></MarkdownEditor>
+<div class="mark-down-viewer">  
+    @((MarkupString) Markdown.ToHtml(Body))
+</div>
 
-<MarkdownViewer Body="@Body"></MarkdownViewer>
-
+<br />
+<MudTextField @bind-Value="text" Label="@Localizer["i18n_Mark_Down_Text"]" Variant="Variant.Text"></MudTextField>
 <br />
 <MudTextField @bind-Value="path" Label="@Localizer["i18n_Menu_Path"]" Variant="Variant.Text"></MudTextField>
 <br />
@@ -18,39 +26,192 @@
 <br />
 <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="Save">@Localizer["i18n_Save"]</MudButton>
 
+<br />
+<br />
+<MudExpansionPanels>
+    <MudExpansionPanel Text="@menuHeader">
+        
+        <pre>
+            @((MarkupString)menuItemsJsonStringFormatted)
+</pre>    </MudExpansionPanel>
+</MudExpansionPanels>
+
 @code {
     [Parameter]
-    public string Lang { get; set; }
-
-    private string path;
+    public string Lang{ get; set; }
+ 
+    public string Body { get; set; } = "";
 
     private string filename;
 
+    private string path;
+
+    private string text;
+
+    private string menuItemsJsonStringFormatted;
+
+    private string menuHeader;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        menuHeader = $"{Localizer["i18n_Actual_Menu"]} {Localizer["i18n_For_Menu_Path"]}";
+
+        var menuItemsJsonString = await Http.GetStringAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        menuItemsJsonStringFormatted = Regex.Replace(HttpUtility.HtmlEncode(@menuItemsJsonString), "\r?\n|\r", "<br />");
+
+        await base.OnInitializedAsync();
+    }
+
     protected async Task Save()
     {
-        //var  menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+        // Upload markdown file
+        MultipartFormDataContent content = new MultipartFormDataContent();
 
-        //var pathParts = path.Split('/');
+        var fileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(Body));
 
-        //foreach (var pathPart in pathParts)
-        //{
-        //    var existingMenuItem = menuItems.FirstOrDefault(m => m.Link == pathPart);
-            
-        //    if (existingMenuItem != null)
-        //    {
-        //        existingMenuItem.MarkDownFileName = filename;
-        //    }
-        //    else
-        //    {
-        //        var itemList = menuItems.ToList();
+        content.Add(fileContent, "File", $"{filename}.md");
 
-        //        itemList.Add(new MenuItem
-        //                         {
+        await Http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
 
-        //                         });
-        //    }
-        //}
+        // Handle menu items
 
-        ApplicationState.GlobalNotification.Add($"{@Localizer["i18n_Saved_Successfully"]} - {path} - {filename}");
+        var menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        var menuItemsList = menuItems.ToList();
+
+        var pathParts = path.Split('/');
+
+        var numberOfParts = pathParts.Length;
+
+        if (numberOfParts > 2)
+        {
+            throw new Exception("Too many parts of menu path");
+        }
+
+        filename = $"{filename}.md";
+
+        var existingMenuItem = menuItemsList.FirstOrDefault(m => m.Link == pathParts[0]);
+
+        // Child item exiting
+        if (existingMenuItem != null)
+        {
+            // File is child item
+            if (numberOfParts == 2)
+            {
+                // Child items existing
+                if (existingMenuItem.Children.Any())
+                {
+                    MenuItem existingChild = null;
+
+                    foreach (var child in existingMenuItem.Children)
+                    {
+                        if (child.Link == pathParts[1])
+                        {
+                            existingChild = child;
+                        }
+                    }
+
+                    // Update existing child item
+                    if (existingChild != null)
+                    {
+                        existingChild.MarkDownFileName = filename;
+                    }
+                    // Add new child item
+                    else
+                    {
+                        existingMenuItem.Children.Add(new MenuItem
+                            {
+                                IconName = "arrowRight",
+                                Children = new List<MenuItem>(),
+                                Link = pathParts[1],
+                                MarkDownFileName = filename,
+                                Text = text,
+                                Identifier = Guid.NewGuid().ToString()
+                            });
+                    }
+
+                }
+                // No child items existing, add new child item
+                else
+                {
+                    existingMenuItem.Children = new List<MenuItem> {
+                                                                         new MenuItem
+                                                                             {
+                                                                                 IconName = "arrowRight",
+                                                                                 Children = new List<MenuItem>(),
+                                                                                 Link = pathParts[1],
+                                                                                 MarkDownFileName = filename,
+                                                                                 Text = text,
+                                                                                 Identifier = Guid.NewGuid().ToString()
+                                                                             }
+                                                                     };
+                }
+            }
+            else
+            {
+                existingMenuItem.MarkDownFileName = filename;
+
+                existingMenuItem.Text = text;
+            }
+        }
+        else
+        {
+            // File is child item
+            if (numberOfParts == 2)
+            {
+                // Add top level menu item as parent
+                menuItemsList.Add(new MenuItem
+                                      {
+                                          Children = new List<MenuItem>{
+                                                                           // Add child item
+                                                                           new MenuItem
+                                                                            {
+                                                                                IconName = "arrowRight",
+                                                                                Children = new List<MenuItem>(),
+                                                                                Link = pathParts[1],
+                                                                                MarkDownFileName = filename,
+                                                                                Text = text,
+                                                                                Identifier = Guid.NewGuid().ToString()
+                                                                            }},
+                                          IconName = "arrowRight",
+                                          Link = pathParts[0],
+                                          MarkDownFileName = string.Empty,
+                                          Text = pathParts[0],
+                                          Identifier = Guid.NewGuid().ToString()
+                                      });
+            }
+            // File is top level item
+            else
+            {
+                menuItemsList.Add(new MenuItem
+                                      {
+                                          Children = new List<MenuItem>(),
+                                          IconName = "arrowRight",
+                                          Link = pathParts[0],
+                                          MarkDownFileName = filename,
+                                          Text = text,
+                                          Identifier = Guid.NewGuid().ToString()
+                                      });
+            }
+
+
+        }
+
+        var json = JsonSerializer.Serialize(menuItemsList);
+
+        content = new MultipartFormDataContent();
+
+        fileContent = new ByteArrayContent(Encoding.UTF8.GetBytes(json));
+
+        content.Add(fileContent, "File", "menu.json");
+
+        await Http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
+
+        ApplicationState.GlobalNotification.Add(@Localizer["i18n_Saved_Successfully"]);
+
+        await Task.Delay(1500);
+
+        NavigationManager.NavigateTo("menueditor", true);
     }
 }

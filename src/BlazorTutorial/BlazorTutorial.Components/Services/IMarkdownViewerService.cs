@@ -2,6 +2,6 @@
 {
     internal interface IMarkdownViewerService
     {
-        public Task<IEnumerable<string>> GetAllMarkdownFileNames();
+        public Task<List<string>> GetAllMarkdownFileNames();
     }
 }

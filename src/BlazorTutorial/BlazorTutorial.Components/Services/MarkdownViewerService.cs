@@ -1,8 +1,12 @@
-﻿using BlazorTutorial.Language;
+﻿using BlazorTutorial.Components.Classes;
+using BlazorTutorial.Language;
 using System.Net.Http;
+using static System.Net.WebRequestMethods;
 
 namespace BlazorTutorial.Components.Services
 {
+    using System.Net.Http.Json;
+
     internal class MarkdownViewerService : IMarkdownViewerService
     {
         private readonly HttpClient _httpClient;
@@ -12,13 +16,11 @@ namespace BlazorTutorial.Components.Services
             this._httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<string>> GetAllMarkdownFileNames()
+        public async Task<List<string>> GetAllMarkdownFileNames()
         {
-            HttpResponseMessage response =  await _httpClient.GetAsync("api/getAllMarkdownFileNames");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            /// TODO: return results as a list
-            return new List<string> { "TestFile.rtf", "TestFile2.rtf", "TestFile3.rtf", "TestFile4.rtf" };
+           var files =  await _httpClient.GetFromJsonAsync<string[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/getAllMarkdownFileNames");
+
+           return files.ToList();
         }
     }
 }
