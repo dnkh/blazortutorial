@@ -207,6 +207,9 @@
   <data name="i18n_Saved_Successfully" xml:space="preserve">
     <value>Successfully saved, page will be reloaded</value>
   </data>
+  <data name="i18n_Setting" xml:space="preserve">
+    <value>This is a value from the settings</value>
+  </data>
   <data name="i18n_Show_Loading_Animation" xml:space="preserve">
     <value>Show loading animation</value>
   </data>

@@ -331,6 +331,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is a value from the settings.
+        /// </summary>
+        public static string i18n_Setting {
+            get {
+                return ResourceManager.GetString("i18n_Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show loading animation.
         /// </summary>
         public static string i18n_Show_Loading_Animation {
