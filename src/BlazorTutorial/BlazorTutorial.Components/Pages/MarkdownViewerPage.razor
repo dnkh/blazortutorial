@@ -1,16 +1,27 @@
 ﻿@page "/{lang}/markdownviewer"
+@page "/markdownviewer"
+
 @inject HttpClient Http
 @inject IStringLocalizer<Resource> Localizer
+
 @using BlazorTutorial.Components.Services
 
 <PageTitle>MarkdownViewer</PageTitle>
+
 <MarkdownViewer Body="@MarkdownText"></MarkdownViewer>
+
 <MarkdownViewer Body="@MarkdownText2"></MarkdownViewer>
+
 <MarkdownViewer Body="@MarkdownText3"></MarkdownViewer>
+
 <MarkdownViewer Body="@MarkdownText4"></MarkdownViewer>
+
 <MarkdownViewer Body="@MarkdownText1"></MarkdownViewer>
+
 <br />
+
 <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="GetAllFiles">@Localizer["i18n_Button_Load"]</MudButton>
+
 <br />
 <br />
 

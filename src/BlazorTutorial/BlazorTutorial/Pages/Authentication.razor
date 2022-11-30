@@ -1,5 +1,8 @@
 ﻿@page "/authentication/{action}"
+@page "/{lang}/authentication/{action}"
+
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
 <RemoteAuthenticatorView Action="@Action" />
 
 @code{
