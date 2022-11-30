@@ -61,11 +61,128 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual Menu .
+        /// </summary>
+        public static string i18n_Actual_Menu {
+            get {
+                return ResourceManager.GetString("i18n_Actual_Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On start up the last active page will be loaded always.
+        /// </summary>
+        public static string i18n_Always_Last_Active_Site {
+            get {
+                return ResourceManager.GetString("i18n_Always_Last_Active_Site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string i18n_Button_Load {
+            get {
+                return ResourceManager.GetString("i18n_Button_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose menu items to delete.
+        /// </summary>
+        public static string i18n_Choose_Items_To_Delete {
+            get {
+                return ResourceManager.GetString("i18n_Choose_Items_To_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string i18n_Delete {
+            get {
+                return ResourceManager.GetString("i18n_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted successfully, page will be reloaded.
+        /// </summary>
+        public static string i18n_Deleted_Successfully {
+            get {
+                return ResourceManager.GetString("i18n_Deleted_Successfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (for menu path please use the &quot;Link&quot;entries).
+        /// </summary>
+        public static string i18n_For_Menu_Path {
+            get {
+                return ResourceManager.GetString("i18n_For_Menu_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get details.
+        /// </summary>
+        public static string i18n_Get_Details {
+            get {
+                return ResourceManager.GetString("i18n_Get_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         public static string i18n_Greeting {
             get {
                 return ResourceManager.GetString("i18n_Greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide loading animation.
+        /// </summary>
+        public static string i18n_Hide_Loading_Animation {
+            get {
+                return ResourceManager.GetString("i18n_Hide_Loading_Animation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Markdown filename (without extension).
+        /// </summary>
+        public static string i18n_Mark_Down_Name {
+            get {
+                return ResourceManager.GetString("i18n_Mark_Down_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display name menu.
+        /// </summary>
+        public static string i18n_Mark_Down_Text {
+            get {
+                return ResourceManager.GetString("i18n_Mark_Down_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you can delete menu entries.
+        /// </summary>
+        public static string i18n_Menu_Editor_Description {
+            get {
+                return ResourceManager.GetString("i18n_Menu_Editor_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menupath (Devided by Slash, max. 2 layers, , f.e. &quot;components/test&quot;).
+        /// </summary>
+        public static string i18n_Menu_Path {
+            get {
+                return ResourceManager.GetString("i18n_Menu_Path", resourceCulture);
             }
         }
         
@@ -174,6 +291,60 @@ namespace BlazorTutorial.Components.Shared.Resources {
         public static string i18n_NavMenu_MarkDown_MudBlazorTable {
             get {
                 return ResourceManager.GetString("i18n_NavMenu_MarkDown_MudBlazorTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification example via centralized state.
+        /// </summary>
+        public static string i18n_Notification_Example {
+            get {
+                return ResourceManager.GetString("i18n_Notification_Example", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press button to load.
+        /// </summary>
+        public static string i18n_Press_Button_Load {
+            get {
+                return ResourceManager.GetString("i18n_Press_Button_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string i18n_Save {
+            get {
+                return ResourceManager.GetString("i18n_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully saved, page will be reloaded.
+        /// </summary>
+        public static string i18n_Saved_Successfully {
+            get {
+                return ResourceManager.GetString("i18n_Saved_Successfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show loading animation.
+        /// </summary>
+        public static string i18n_Show_Loading_Animation {
+            get {
+                return ResourceManager.GetString("i18n_Show_Loading_Animation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show notification.
+        /// </summary>
+        public static string i18n_Show_Notification {
+            get {
+                return ResourceManager.GetString("i18n_Show_Notification", resourceCulture);
             }
         }
     }

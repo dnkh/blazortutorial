@@ -117,8 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="i18n_Actual_Menu" xml:space="preserve">
+    <value>Actual Menu </value>
+  </data>
+  <data name="i18n_Always_Last_Active_Site" xml:space="preserve">
+    <value>On start up the last active page will be loaded always</value>
+  </data>
+  <data name="i18n_Button_Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="i18n_Choose_Items_To_Delete" xml:space="preserve">
+    <value>Choose menu items to delete</value>
+  </data>
+  <data name="i18n_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="i18n_Deleted_Successfully" xml:space="preserve">
+    <value>Deleted successfully, page will be reloaded</value>
+  </data>
+  <data name="i18n_For_Menu_Path" xml:space="preserve">
+    <value>(for menu path please use the "Link"entries)</value>
+  </data>
+  <data name="i18n_Get_Details" xml:space="preserve">
+    <value>Get details</value>
+  </data>
   <data name="i18n_Greeting" xml:space="preserve">
     <value>Hello</value>
+  </data>
+  <data name="i18n_Hide_Loading_Animation" xml:space="preserve">
+    <value>Hide loading animation</value>
+  </data>
+  <data name="i18n_Mark_Down_Name" xml:space="preserve">
+    <value>Markdown filename (without extension)</value>
+  </data>
+  <data name="i18n_Mark_Down_Text" xml:space="preserve">
+    <value>Display name menu</value>
+  </data>
+  <data name="i18n_Menu_Editor_Description" xml:space="preserve">
+    <value>Here you can delete menu entries</value>
+  </data>
+  <data name="i18n_Menu_Path" xml:space="preserve">
+    <value>Menupath (Devided by Slash, max. 2 layers, , f.e. "components/test")</value>
   </data>
   <data name="i18n_MudBlazor_Table_Header_MolarMass" xml:space="preserve">
     <value>Molar mass</value>
@@ -155,5 +194,23 @@
   </data>
   <data name="i18n_NavMenu_MarkDown_MudBlazorTable" xml:space="preserve">
     <value>Table</value>
+  </data>
+  <data name="i18n_Notification_Example" xml:space="preserve">
+    <value>Notification example via centralized state</value>
+  </data>
+  <data name="i18n_Press_Button_Load" xml:space="preserve">
+    <value>Press button to load</value>
+  </data>
+  <data name="i18n_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="i18n_Saved_Successfully" xml:space="preserve">
+    <value>Successfully saved, page will be reloaded</value>
+  </data>
+  <data name="i18n_Show_Loading_Animation" xml:space="preserve">
+    <value>Show loading animation</value>
+  </data>
+  <data name="i18n_Show_Notification" xml:space="preserve">
+    <value>Show notification</value>
   </data>
 </root>

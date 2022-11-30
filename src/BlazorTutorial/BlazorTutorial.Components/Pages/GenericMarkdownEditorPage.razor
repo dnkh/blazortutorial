@@ -1,0 +1,31 @@
+@page "/{Lang}/genericmarkdowneditor"
+@using Microsoft.AspNetCore.WebUtilities
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<MarkdownViewer Body="@Body"></MarkdownViewer>
+
+@code {
+    [Parameter]
+    public string Lang{ get; set; }
+
+    public string Body { get; set; } = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+            
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("markdownName", out var _markDownName))
+            {
+                Body = await Http.GetStringAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/{_markDownName}");
+
+                StateHasChanged();
+            }
+        }
+
+        base.OnAfterRender(firstRender);
+    }
+
+}

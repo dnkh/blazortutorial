@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,12 +15,15 @@
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.30.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.8" />
     <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.8" />
     <PackageReference Include="MudBlazor" Version="6.0.15" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorTutorial.Core\BlazorTutorial.Core.csproj" />
     <ProjectReference Include="..\BlazorTutorial.Language\BlazorTutorial.Language.csproj" />
   </ItemGroup>
 
@@ -41,6 +44,10 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

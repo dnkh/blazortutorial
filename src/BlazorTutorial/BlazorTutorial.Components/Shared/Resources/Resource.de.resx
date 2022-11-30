@@ -117,8 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="i18n_Actual_Menu" xml:space="preserve">
+    <value>Aktuelles Menu</value>
+  </data>
+  <data name="i18n_Always_Last_Active_Site" xml:space="preserve">
+    <value>Es wird immer die zuletzt geöffnete Seite beim Start geladen</value>
+  </data>
+  <data name="i18n_Button_Load" xml:space="preserve">
+    <value>Laden</value>
+  </data>
+  <data name="i18n_Choose_Items_To_Delete" xml:space="preserve">
+    <value>Wähle die Menueinträge, die Du löschen möchtest</value>
+  </data>
+  <data name="i18n_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="i18n_Deleted_Successfully" xml:space="preserve">
+    <value>Erfolgreich gelöscht, es wird neu geladen</value>
+  </data>
+  <data name="i18n_For_Menu_Path" xml:space="preserve">
+    <value>(für Menupfad bitte die jeweiligen "Link"-Einträge verwenden)</value>
+  </data>
+  <data name="i18n_Get_Details" xml:space="preserve">
+    <value>Erfahre mehr</value>
+  </data>
   <data name="i18n_Greeting" xml:space="preserve">
     <value>Hallo</value>
+  </data>
+  <data name="i18n_Hide_Loading_Animation" xml:space="preserve">
+    <value>Verberge Ladeanimation</value>
+  </data>
+  <data name="i18n_Mark_Down_Name" xml:space="preserve">
+    <value>Markdown Dateiname (ohne Endung)</value>
+  </data>
+  <data name="i18n_Mark_Down_Text" xml:space="preserve">
+    <value>Anzeigename Menu</value>
+  </data>
+  <data name="i18n_Menu_Editor_Description" xml:space="preserve">
+    <value>Hier können die Menueinträge gelöscht werden</value>
+  </data>
+  <data name="i18n_Menu_Path" xml:space="preserve">
+    <value>Menupfad (Trennung durch Slash, maximal 2 Ebenen, z.B. "components/test")</value>
   </data>
   <data name="i18n_MudBlazor_Table_Header_MolarMass" xml:space="preserve">
     <value>Molmasse</value>
@@ -155,5 +194,23 @@
   </data>
   <data name="i18n_NavMenu_MarkDown_MudBlazorTable" xml:space="preserve">
     <value>Tabelle</value>
+  </data>
+  <data name="i18n_Notification_Example" xml:space="preserve">
+    <value>Benachrichtigungsbeispiel über zentralen State</value>
+  </data>
+  <data name="i18n_Press_Button_Load" xml:space="preserve">
+    <value>Button drücken zum Laden</value>
+  </data>
+  <data name="i18n_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="i18n_Saved_Successfully" xml:space="preserve">
+    <value>Erfolgreich gespeichert, es wird neu geladen</value>
+  </data>
+  <data name="i18n_Show_Loading_Animation" xml:space="preserve">
+    <value>Zeige Ladeanimation</value>
+  </data>
+  <data name="i18n_Show_Notification" xml:space="preserve">
+    <value>Zeige Benachrichtigung</value>
   </data>
 </root>
