@@ -1,4 +1,6 @@
 ﻿@page "/{lang}/mudblazor/table"
+@page "/mudblazor/table"
+
 @inject HttpClient httpClient
 @inject IStringLocalizer<Resource> Localizer
 
@@ -44,7 +46,6 @@
         }
     </MudItem>
 </MudGrid>
-
 
 @code {
     [Parameter]

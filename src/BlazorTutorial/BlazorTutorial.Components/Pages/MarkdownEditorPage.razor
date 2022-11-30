@@ -1,11 +1,12 @@
 @page "/{Lang}/markdowneditor"
-@inject IJSRuntime JS
+@page "/markdowneditor"
 
 @using BlazorTutorial.Core.StateHandling
 @using Markdig
 @using System.Text.RegularExpressions
 @using System.Web
 @using System.Text.Json
+
 @inject IStringLocalizer<Resource> Localizer
 @inject ApplicationState ApplicationState
 @inject HttpClient Http

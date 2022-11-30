@@ -23,6 +23,7 @@ namespace BlazorTutorial
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<ApplicationState>();
             builder.Services.AddScoped<ICookieService, CookieService>();
+            builder.Services.AddScoped<ISettingService, SettingService>();
             builder.Services.AddLocalization();
             builder.Services.AddMudServices(config =>
                 {

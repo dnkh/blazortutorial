@@ -1,4 +1,6 @@
 ﻿@page "/{Lang}/menueditor"
+@page "/menueditor"
+
 @using System.Text.RegularExpressions
 @using System.Web
 @using BlazorTutorial.Core.StateHandling
@@ -17,13 +19,19 @@
     <MudExpansionPanel Text="@Localizer["i18n_Actual_Menu"]">
         <pre>
             @((MarkupString)menuItemsJsonStringFormatted)
-</pre>    </MudExpansionPanel>
+        </pre>    
+    </MudExpansionPanel>
 </MudExpansionPanels>
+
 <br />
+
 <p>@Localizer["i18n_Choose_Items_To_Delete"]</p>
+
 <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="Delete">@Localizer["i18n_Delete"]</MudButton>
+
 <br />
 <br />
+
 <MudDataGrid T="MenuItem" Items="@items" MultiSelection="true" SelectedItemsChanged="SelectedItemChangedParent">
     <Columns>
         <SelectColumn T="MenuItem"/>
@@ -49,7 +57,6 @@
         }
     </ChildRowContent>
 </MudDataGrid>
-
 
 @code {
     [Parameter]

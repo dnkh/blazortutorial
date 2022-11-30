@@ -207,6 +207,9 @@
   <data name="i18n_Saved_Successfully" xml:space="preserve">
     <value>Erfolgreich gespeichert, es wird neu geladen</value>
   </data>
+  <data name="i18n_Setting" xml:space="preserve">
+    <value>Dies ist ein ausgelesener Setting-Wert</value>
+  </data>
   <data name="i18n_Show_Loading_Animation" xml:space="preserve">
     <value>Zeige Ladeanimation</value>
   </data>
