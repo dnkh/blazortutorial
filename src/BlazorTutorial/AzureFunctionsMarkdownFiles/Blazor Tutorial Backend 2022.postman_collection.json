@@ -57,6 +57,49 @@
 			"response": []
 		},
 		{
+			"name": "DeleteMarkdownFile",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7071/api/DeleteMarkdownFile/TestFile.rtf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"DeleteMarkdownFile",
+						"TestFile.rtf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteMarkdownFile - Az",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://blazortutorialbackendfunctions.azurewebsites.net/api/DeleteMarkdownFile/TestFile.rtf",
+					"protocol": "https",
+					"host": [
+						"blazortutorialbackendfunctions",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"DeleteMarkdownFile",
+						"TestFile.rtf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GetAllMarkdownFileNames",
 			"request": {
 				"method": "GET",
@@ -87,7 +130,7 @@
 						{
 							"key": "File",
 							"type": "file",
-							"src": "/Users/jweidmann/Downloads/TestFile3.rtf"
+							"src": "/Users/jweidmann/Downloads/TestFile.rtf"
 						}
 					]
 				},
@@ -113,7 +156,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/TestFile3.rtf",
+					"raw": "https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/TestFile.rtf",
 					"protocol": "https",
 					"host": [
 						"blazortutorialbackendfunctions",
@@ -123,7 +166,7 @@
 					"path": [
 						"api",
 						"DownloadMarkdownFile",
-						"TestFile3.rtf"
+						"TestFile.rtf"
 					]
 				}
 			},
