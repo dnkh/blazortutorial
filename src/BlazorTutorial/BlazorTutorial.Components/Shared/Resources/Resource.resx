@@ -148,7 +148,7 @@
     <value>Hide loading animation</value>
   </data>
   <data name="i18n_Mark_Down_Name" xml:space="preserve">
-    <value>Markdown filename (without extension)</value>
+    <value>Markdown filename (without extension) - Has to be unique because it will be overridden otherwise</value>
   </data>
   <data name="i18n_Mark_Down_Text" xml:space="preserve">
     <value>Display name menu</value>

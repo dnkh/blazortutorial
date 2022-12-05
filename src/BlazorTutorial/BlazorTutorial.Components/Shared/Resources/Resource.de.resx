@@ -148,7 +148,7 @@
     <value>Verberge Ladeanimation</value>
   </data>
   <data name="i18n_Mark_Down_Name" xml:space="preserve">
-    <value>Markdown Dateiname (ohne Endung)</value>
+    <value>Markdown Dateiname (ohne Endung) - Muss eindeutig sein, da sonst überschrieben wird</value>
   </data>
   <data name="i18n_Mark_Down_Text" xml:space="preserve">
     <value>Anzeigename Menu</value>

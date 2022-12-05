@@ -78,7 +78,7 @@
 
         var menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
 
-        items = menuItems.ToList();
+        items = menuItems.Where(m => m.MarkDownFileName != "" && m.MarkDownFileName != null || m.Children.Any(c => c.MarkDownFileName != "" && m.MarkDownFileName != null)).ToList();
 
         await base.OnInitializedAsync();
     }
@@ -129,7 +129,7 @@
         }
 
         items = items.Except(parentsToRemove).ToList();
-
+        
         var json = JsonSerializer.Serialize(items);
 
         var content = new MultipartFormDataContent();
@@ -139,6 +139,15 @@
         content.Add(fileContent, "File", "menu.json");
 
         await Http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
+
+        var markDownFileNames = selectedItemsParent.Select(i => i.MarkDownFileName).ToList();
+
+        markDownFileNames.AddRange(selectedItemsChild.Select(i => i.MarkDownFileName).ToList());
+
+        foreach (var markDownFileName in markDownFileNames)
+        {
+            await Http.DeleteAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DeleteMarkdownFile/{markDownFileName}");
+        }
 
         ApplicationState.GlobalNotification.Add(Localizer["i18n_Deleted_Successfully"]);
            

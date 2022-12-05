@@ -151,7 +151,7 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Markdown filename (without extension).
+        ///   Looks up a localized string similar to Markdown filename (without extension) - Has to be unique because it will be overridden otherwise.
         /// </summary>
         public static string i18n_Mark_Down_Name {
             get {
