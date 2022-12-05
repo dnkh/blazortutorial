@@ -1,11 +1,15 @@
 @page "/securedpage"
 @page "/{lang}/securedpage"
 
+@inject IStringLocalizer<Resource> Localizer
+
 @attribute [Authorize]
 
 <PageTitle>Secured page</PageTitle>  
 
 <h1>Secured page</h1>
+
+@Localizer["i18n_Secured_Page"]
 
 @code {
     [Parameter]

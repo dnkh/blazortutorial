@@ -376,6 +376,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This page can only be accessed after authorization from the bridging IT tenant, as it has been provided with your authorize attribute..
+        /// </summary>
+        public static string i18n_Secured_Page {
+            get {
+                return ResourceManager.GetString("i18n_Secured_Page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This is a value from the settings.
         /// </summary>
         public static string i18n_Setting {

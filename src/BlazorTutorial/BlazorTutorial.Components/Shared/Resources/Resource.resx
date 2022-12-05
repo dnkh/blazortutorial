@@ -222,6 +222,9 @@
   <data name="i18n_Saved_Successfully" xml:space="preserve">
     <value>Successfully saved, page will be reloaded</value>
   </data>
+  <data name="i18n_Secured_Page" xml:space="preserve">
+    <value>This page can only be accessed after authorization from the bridging IT tenant, as it has been provided with your authorize attribute.</value>
+  </data>
   <data name="i18n_Setting" xml:space="preserve">
     <value>This is a value from the settings</value>
   </data>

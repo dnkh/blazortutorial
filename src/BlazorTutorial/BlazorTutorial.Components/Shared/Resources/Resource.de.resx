@@ -222,6 +222,9 @@
   <data name="i18n_Saved_Successfully" xml:space="preserve">
     <value>Erfolgreich gespeichert, es wird neu geladen</value>
   </data>
+  <data name="i18n_Secured_Page" xml:space="preserve">
+    <value>Diese Seite ist nur nach Authorisierung am bridging-IT-Tenant abrufbar, da sie mit deinem Authorize-Atrribute versehen wurde.</value>
+  </data>
   <data name="i18n_Setting" xml:space="preserve">
     <value>Dies ist ein ausgelesener Setting-Wert</value>
   </data>
