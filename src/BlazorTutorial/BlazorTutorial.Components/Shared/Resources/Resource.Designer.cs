@@ -151,6 +151,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter markdown text here.
+        /// </summary>
+        public static string i18n_Mark_Down_Editor_Input {
+            get {
+                return ResourceManager.GetString("i18n_Mark_Down_Editor_Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Markdown filename (without extension) - Has to be unique because it will be overridden otherwise.
         /// </summary>
         public static string i18n_Mark_Down_Name {

@@ -63,6 +63,11 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+.mark-down-input {
+    border: 1px solid grey !important;
+    margin-bottom: 10px !important;
+    padding: 10px !important;
+}
 
 .mark-down-viewer {
     height: 300px;

@@ -7,6 +7,13 @@
     "Children": []
   },
   {
+    "Link": "securedpage",
+    "Text": "Secured Page",
+    "IconName": "lock",
+    "MarkDownFileName": "",
+    "Children": []
+  },
+  {
     "Link": "genericmarkdowneditor",
     "Text": "Getting started",
     "IconName": "play-circle",
@@ -61,6 +68,13 @@
     "Link": "notExisting",
     "Text": "FAQs",
     "IconName": "question",
+    "MarkDownFileName": "",
+    "Children": []
+  },
+  {
+    "Link": "menueditor",
+    "Text": "Menu editor",
+    "IconName": "deletesweep",
     "MarkDownFileName": "",
     "Children": []
   },

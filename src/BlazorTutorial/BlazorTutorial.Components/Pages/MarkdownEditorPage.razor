@@ -12,7 +12,7 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<MudTextField T="string" Label="Markdown text" Variant="Variant.Text" @bind-Value="Body" Lines="5" />
+<MudTextField T="string" Label="@Localizer["i18n_Mark_Down_Editor_Input"]" Variant="Variant.Text" @bind-Value="Body" Lines="5" Class="mark-down-input" />
 
 <div class="mark-down-viewer">  
     @((MarkupString) Markdown.ToHtml(Body))
