@@ -132,6 +132,9 @@
   <data name="i18n_Choose_Markdown_To_Edit" xml:space="preserve">
     <value>Wähle die Seite zum Bearbeiten</value>
   </data>
+  <data name="i18n_cookie_handling" xml:space="preserve">
+    <value>Die letzte besuchte Seite wird beim erneuten Seitenaufruf geöffnet.&lt;br /&gt;Hierzu werden die Cookies der Seite über einen&lt;a class="link" href="https://blazor-university.com/javascript-interop/"&gt;Blazor Interop&lt;/a&gt; Call abgerufen.&lt;br /&gt;Zum Testen löscht man einfach die Cookies der Seite, schließt den Browser und landet auf der Startseite.&lt;br /&gt;Navigiert man nun zu einer anderen Seite, schließt den Browser&lt;br /&gt;und öffnet ihn erneut, so wird man zur zuletzt besuchten Seite weitergeleitet.</value>
+  </data>
   <data name="i18n_Delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="i18n_Hide_Loading_Animation" xml:space="preserve">
     <value>Verberge Ladeanimation</value>
+  </data>
+  <data name="i18n_loading_animation" xml:space="preserve">
+    <value>Die Ladeanimation ist als Overlay mit einer Standardanimation im Menu angelegt&lt;br /&gt;und kann so von jeder Seite aus genutzt werden, ohne die Animation jedes Mal erneut einbinden zu müssen.</value>
   </data>
   <data name="i18n_Mark_Down_Editor_Input" xml:space="preserve">
     <value>Markdown text hier eingeben</value>
@@ -201,6 +207,9 @@
   <data name="i18n_NavMenu_MarkDown_MudBlazorTable" xml:space="preserve">
     <value>Tabelle</value>
   </data>
+  <data name="i18n_notification" xml:space="preserve">
+    <value>Die Benachrichtigung ist über einen Applicationstate umgesetzt.&lt;br /&gt;Hierbei wird eine Klasse zentral über die Dependency Injection eingebunden&lt;br /&gt;und dann aus mehreren Komponenten heraus als zentraler Ansprechpunkt verwendet.&lt;br /&gt;Das Konzept ähnelt stark dem von &lt;a class="link" href="https://redux.js.org/"&gt;Redux&lt;/a&gt;.</value>
+  </data>
   <data name="i18n_Notification_Example" xml:space="preserve">
     <value>Benachrichtigungsbeispiel über zentralen State</value>
   </data>
@@ -215,6 +224,9 @@
   </data>
   <data name="i18n_Setting" xml:space="preserve">
     <value>Dies ist ein ausgelesener Setting-Wert</value>
+  </data>
+  <data name="i18n_settings" xml:space="preserve">
+    <value>Die Application Settings werden über einen Service direkt aus der über die Depenendy Injection zur Verfügung gestellten IConfiguration gelesen und typisiert ausgegeben.</value>
   </data>
   <data name="i18n_Show_Loading_Animation" xml:space="preserve">
     <value>Zeige Ladeanimation</value>

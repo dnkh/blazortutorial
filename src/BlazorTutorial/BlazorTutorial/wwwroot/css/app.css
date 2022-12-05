@@ -85,3 +85,8 @@ a, .btn-link {
 .mud-table-foot {
     display: none;
 }
+
+.link {
+    text-decoration: underline;
+    color: blue;
+}

@@ -106,6 +106,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The last page visited is opened when the page is called up again.&lt;br /&gt;To do this, the site&apos;s cookies are processed using a&lt;a class=&quot;link&quot; href=&quot;https://blazor-university.com/javascript-interop/&quot;&gt;Blazor Interop &lt;/a&gt; Call.&lt;br /&gt;To test, simply delete the site&apos;s cookies, close the browser and land on the home page.&lt;br /&gt;Now if you navigate to another site, close the browser&lt;br /&gt;and if you open it again, you will be redirected to the last page you visited..
+        /// </summary>
+        public static string i18n_cookie_handling {
+            get {
+                return ResourceManager.GetString("i18n_cookie_handling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string i18n_Delete {
@@ -156,6 +165,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         public static string i18n_Hide_Loading_Animation {
             get {
                 return ResourceManager.GetString("i18n_Hide_Loading_Animation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The loading animation is created as an overlay with a standard animation in the menu&lt;br /&gt;and can thus be used from any page without having to re-integrate the animation each time..
+        /// </summary>
+        public static string i18n_loading_animation {
+            get {
+                return ResourceManager.GetString("i18n_loading_animation", resourceCulture);
             }
         }
         
@@ -313,6 +331,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The notification is implemented via an application state.&lt;br /&gt;Here, a class is integrated centrally via dependency injection&lt;br /&gt;and then used as a central point of contact from several components.&lt;br /&gt;The concept is very similar to that of &lt;a class =&quot;link&quot; href=&quot;https://redux.js.org/&quot;&gt;Redux&lt;/a&gt;..
+        /// </summary>
+        public static string i18n_notification {
+            get {
+                return ResourceManager.GetString("i18n_notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification example via centralized state.
         /// </summary>
         public static string i18n_Notification_Example {
@@ -354,6 +381,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         public static string i18n_Setting {
             get {
                 return ResourceManager.GetString("i18n_Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application settings are read via a service directly from the IConfiguration provided via the dependency injection and output in typed form..
+        /// </summary>
+        public static string i18n_settings {
+            get {
+                return ResourceManager.GetString("i18n_settings", resourceCulture);
             }
         }
         
