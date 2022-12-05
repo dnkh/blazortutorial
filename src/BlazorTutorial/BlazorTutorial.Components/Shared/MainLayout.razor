@@ -63,13 +63,15 @@
 
         var lastVisitedPage = await CookieService.GetValue(_lastVisitedPageKey);
 
-        if (!string.IsNullOrWhiteSpace(lastVisitedPage))
-        {
-            NavigationManager.NavigateTo(lastVisitedPage);
-        }
+        var lastUriPart = NavigationManager.Uri.Substring(NavigationManager.Uri.Substring(0, NavigationManager.Uri.LastIndexOf("/")).LastIndexOf("/") + 1);
 
         NavigationManager.LocationChanged += LocationChanged;
+        
+        if (!string.IsNullOrWhiteSpace(lastVisitedPage) && !languageService.IsLanguageRedirect(lastUriPart))
+        {
 
+            NavigationManager.NavigateTo(lastVisitedPage);
+        }
     }
 
     void LocationChanged(object sender, LocationChangedEventArgs e)

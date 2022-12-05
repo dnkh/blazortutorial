@@ -4,6 +4,8 @@
     {
         bool Exist(string lang);
 
+        bool IsLanguageRedirect(string uri);
+
         string GetUriLanguage();
 
         void NavigateTo(string url, string lang = "", bool forceLoad = true);
