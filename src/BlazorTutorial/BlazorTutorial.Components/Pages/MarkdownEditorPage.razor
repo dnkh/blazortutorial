@@ -12,6 +12,14 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
+<MudSelect T="string" Label="@Localizer["i18n_Choose_Markdown_To_Edit"]" ValueChanged="SetEditValues">
+    @foreach (var item in itemList)
+    {
+        <MudSelectItem T="string" Value="item.Key">@item.Value</MudSelectItem>
+    }
+
+</MudSelect>
+
 <MudTextField T="string" Label="@Localizer["i18n_Mark_Down_Editor_Input"]" Variant="Variant.Text" @bind-Value="Body" Lines="5" Class="mark-down-input" />
 
 <div class="mark-down-viewer">  
@@ -40,8 +48,12 @@
 @code {
     [Parameter]
     public string Lang{ get; set; }
- 
+
     public string Body { get; set; } = "";
+
+    private List<KeyValuePair<string, string>> itemList = new List<KeyValuePair<string, string>>();
+
+    private List<MenuItem> menuItems = new List<MenuItem>();
 
     private string filename;
 
@@ -52,12 +64,21 @@
     private string menuItemsJsonStringFormatted;
 
     private string menuHeader;
-    
+
     protected override async Task OnInitializedAsync()
     {
         menuHeader = $"{Localizer["i18n_Actual_Menu"]} {Localizer["i18n_For_Menu_Path"]}";
 
         var menuItemsJsonString = await Http.GetStringAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        var temp = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
+
+        menuItems = temp.ToList();
+
+        itemList = menuItems
+            .Where(m => m.MarkDownFileName != "" && m.MarkDownFileName != null || m.Children.Any(c => c.MarkDownFileName != "" && m.MarkDownFileName != null))
+            .Select(m => new KeyValuePair<string,string>(m.Identifier, m.Text))
+            .ToList();
 
         menuItemsJsonStringFormatted = Regex.Replace(HttpUtility.HtmlEncode(@menuItemsJsonString), "\r?\n|\r", "<br />");
 
@@ -215,4 +236,46 @@
 
         NavigationManager.NavigateTo("menueditor", true);
     }
+
+    private async Task SetEditValues(string identifier)
+    {
+        var item = new MenuItem();
+
+        foreach (var menuItem in menuItems)
+        {
+            if (menuItem.Identifier == identifier)
+            {
+                item = menuItem;
+
+                break;
+            }
+            else
+            {
+                foreach (var menuItemChild in menuItem.Children)
+                {
+                    if (menuItemChild.Identifier == identifier)
+                    {
+                        item = menuItemChild;
+
+                        break;
+                    }
+
+                }
+
+                if (item.Identifier == identifier)
+                {
+                    break;
+                }
+            }
+        }
+
+        Body = await Http.GetStringAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/{item.MarkDownFileName}");
+
+        filename = item.MarkDownFileName;
+
+        path = item.Link;
+
+        text = item.Text;
+    }
+
 }

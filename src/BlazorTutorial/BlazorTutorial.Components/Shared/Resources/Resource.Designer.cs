@@ -97,6 +97,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose site to edit.
+        /// </summary>
+        public static string i18n_Choose_Markdown_To_Edit {
+            get {
+                return ResourceManager.GetString("i18n_Choose_Markdown_To_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string i18n_Delete {

@@ -129,6 +129,9 @@
   <data name="i18n_Choose_Items_To_Delete" xml:space="preserve">
     <value>Choose menu items to delete</value>
   </data>
+  <data name="i18n_Choose_Markdown_To_Edit" xml:space="preserve">
+    <value>Choose site to edit</value>
+  </data>
   <data name="i18n_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>

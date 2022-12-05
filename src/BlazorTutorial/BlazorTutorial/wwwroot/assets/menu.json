@@ -4,28 +4,32 @@
     "Text": "Home",
     "IconName": "home",
     "MarkDownFileName": "",
-    "Children": []
+    "Children": [],
+    "Identifier": "34d6d77a-2060-4758-83bf-2236823ed31b"
   },
   {
     "Link": "securedpage",
     "Text": "Secured Page",
     "IconName": "lock",
     "MarkDownFileName": "",
-    "Children": []
+    "Children": [],
+    "Identifier": "db06eef1-97f7-485a-9fd5-b873d1e9e94b"
   },
   {
     "Link": "genericmarkdowneditor",
     "Text": "Getting started",
     "IconName": "play-circle",
-    "MarkDownFileName": "FirstMarkdown.txt",
-    "Children": []
+    "MarkDownFileName": "FirstMarkDown.md",
+    "Children": [],
+    "Identifier": "cbb06350-7082-401f-9aa8-4a9c5888143c"
   },
   {
     "Link": "notExisting",
     "Text": "Documentation",
     "IconName": "book",
     "MarkDownFileName": "",
-    "Children": []
+    "Children": [],
+    "Identifier": "e95282e0-f261-46d3-b76c-84ae4a44d7b8"
   },
   {
     "Link": "components",
@@ -38,16 +42,19 @@
         "Text": "i18n_NavMenu_MarkDown_MarkDownEditor",
         "IconName": "pencil",
         "MarkDownFileName": "",
-        "Children": []
+        "Children": [],
+        "Identifier": "3e2a9e27-b814-426c-b0c0-eed32be3ff88"
       },
       {
         "Link": "markdownviewer",
         "Text": "i18n_NavMenu_MarkDown_MarkDownViewer",
         "IconName": "assignment",
         "MarkDownFileName": "",
-        "Children": []
+        "Children": [],
+        "Identifier": "5d5c38a4-3053-4b0e-b93a-0f71128b1d68"
       }
-    ]
+    ],
+    "Identifier": "9b8815a4-1cc4-4937-9791-534214550b64"
   },
   {
     "Link": "mudblazor",
@@ -60,29 +67,34 @@
         "Text": "i18n_NavMenu_MarkDown_MudBlazorTable",
         "IconName": "grid",
         "MarkDownFileName": "",
-        "Children": []
+        "Children": [],
+        "Identifier": "5ad40093-87c9-476e-abf9-6e66c90ff450"
       }
-    ]
+    ],
+    "Identifier": "9dc4eb6e-b57b-4c8e-b889-2938a03c400b"
   },
   {
     "Link": "notExisting",
     "Text": "FAQs",
     "IconName": "question",
     "MarkDownFileName": "",
-    "Children": []
+    "Children": [],
+    "Identifier": "d8317268-2514-45a9-8abe-3bc73bae299b"
   },
   {
     "Link": "menueditor",
     "Text": "Menu editor",
     "IconName": "deletesweep",
     "MarkDownFileName": "",
-    "Children": []
+    "Children": [],
+    "Identifier": "d7214616-4529-43d2-a15e-5ed576e3d4f8"
   },
   {
     "Link": "http://localhost:7071/api/swagger/ui",
     "Text": "Azure functions",
     "IconName": "functions",
     "MarkDownFileName": "",
-    "Children": []
+    "Children": [],
+    "Identifier": "7332d109-2fc8-4450-aa0d-1c63fb5b315c"
   }
 ]
