@@ -2,9 +2,15 @@
 @page "/genericmarkdowneditor"
 
 @using Microsoft.AspNetCore.WebUtilities
+@using Microsoft.AspNetCore.Authorization
 
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+
+@if (isSecured)
+{
+    @attribute [Authorize]
+}
 
 <MarkdownViewer Body="@Body"></MarkdownViewer>
 
@@ -14,12 +20,25 @@
 
     public string Body { get; set; } = "";
 
+    private bool isSecured;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
             
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("isSecured", out var _isSecured))
+            {
+                var text = _isSecured.FirstOrDefault();
+
+                if (text != null)
+                {
+                    isSecured = bool.Parse(text);
+                }
+
+            }
+
             if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("markdownName", out var _markDownName))
             {
                 Body = await Http.GetStringAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/{_markDownName}");
