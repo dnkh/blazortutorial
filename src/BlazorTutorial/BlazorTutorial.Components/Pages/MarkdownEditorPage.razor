@@ -33,6 +33,8 @@
 <br />
 <MudTextField @bind-Value="filename" Label="@Localizer["i18n_Mark_Down_Name"]" Variant="Variant.Text"></MudTextField>
 <br />
+<MudCheckBox @bind-Checked="@isSecured">@Localizer["i18n_Is_Secured"]</MudCheckBox>
+<br />
 <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="Save">@Localizer["i18n_Save"]</MudButton>
 
 <br />
@@ -64,6 +66,8 @@
     private string menuItemsJsonStringFormatted;
 
     private string menuHeader;
+
+    private bool isSecured;
 
     protected override async Task OnInitializedAsync()
     {
@@ -271,11 +275,15 @@
 
         Body = await Http.GetStringAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/{item.MarkDownFileName}");
 
-        filename = item.MarkDownFileName;
+        var extension = System.IO.Path.GetExtension(item.MarkDownFileName);
+
+        filename = item.MarkDownFileName.Substring(0, item.MarkDownFileName.Length - extension.Length);
 
         path = item.Link;
 
         text = item.Text;
+
+        isSecured = item.IsSecured;
     }
 
 }

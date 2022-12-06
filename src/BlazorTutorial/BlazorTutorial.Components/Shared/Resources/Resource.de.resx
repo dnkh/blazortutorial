@@ -153,6 +153,9 @@
   <data name="i18n_Hide_Loading_Animation" xml:space="preserve">
     <value>Verberge Ladeanimation</value>
   </data>
+  <data name="i18n_Is_Secured" xml:space="preserve">
+    <value>Seite ist nur nach Authentifizierung erreichbar</value>
+  </data>
   <data name="i18n_loading_animation" xml:space="preserve">
     <value>Die Ladeanimation ist als Overlay mit einer Standardanimation im Menu angelegt&lt;br /&gt;und kann so von jeder Seite aus genutzt werden, ohne die Animation jedes Mal erneut einbinden zu müssen.</value>
   </data>

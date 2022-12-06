@@ -18,5 +18,7 @@
         public List<MenuItem> Children { get; set; }
 
         public string Identifier { get; set; }
+
+        public bool IsSecured { get; set; }
     }
 }

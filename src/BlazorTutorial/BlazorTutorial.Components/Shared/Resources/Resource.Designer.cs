@@ -169,6 +169,15 @@ namespace BlazorTutorial.Components.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page can only be reached after authentication.
+        /// </summary>
+        public static string i18n_Is_Secured {
+            get {
+                return ResourceManager.GetString("i18n_Is_Secured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The loading animation is created as an overlay with a standard animation in the menu&lt;br /&gt;and can thus be used from any page without having to re-integrate the animation each time..
         /// </summary>
         public static string i18n_loading_animation {

@@ -22,7 +22,7 @@
                     {
                         var url = childMenuItem.Link.Contains("http") ? childMenuItem.Link : languageService.GetLanguageUrl(this.Lang, childMenuItem.Link);
 
-                        url = !string.IsNullOrWhiteSpace(childMenuItem.MarkDownFileName) ? $"{languageService.GetLanguageUrl(this.Lang, "genericmarkdowneditor")}?markdownName={childMenuItem.MarkDownFileName}" : url;
+                        url = !string.IsNullOrWhiteSpace(childMenuItem.MarkDownFileName) ? $"{languageService.GetLanguageUrl(this.Lang, "genericmarkdowneditor")}?markdownName={childMenuItem.MarkDownFileName}&isSecured={childMenuItem.IsSecured.ToString()}" : url;
 
                         <MudNavLink Href="@url" Match="NavLinkMatch.All" Icon="@this.GetIcon(childMenuItem.IconName)">
                              @Localizer[childMenuItem.Text]
@@ -34,7 +34,7 @@
             {
                 var url = menuItem.Link.Contains("http") ? menuItem.Link : languageService.GetLanguageUrl(this.Lang, menuItem.Link);
 
-                url = !string.IsNullOrWhiteSpace(menuItem.MarkDownFileName) ? $"{languageService.GetLanguageUrl(this.Lang, "genericmarkdowneditor")}?markdownName={menuItem.MarkDownFileName}" : url;
+                url = !string.IsNullOrWhiteSpace(menuItem.MarkDownFileName) ? $"{languageService.GetLanguageUrl(this.Lang, "genericmarkdowneditor")}?markdownName={menuItem.MarkDownFileName}&isSecured={menuItem.IsSecured.ToString()}" : url;
 
                 <MudNavLink Href="@url" ForceLoad="true" Match="NavLinkMatch.Prefix" Icon="@this.GetIcon(menuItem.IconName)">
                     @Localizer[menuItem.Text]
