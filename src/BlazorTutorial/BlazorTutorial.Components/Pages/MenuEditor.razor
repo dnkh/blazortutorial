@@ -32,7 +32,7 @@
 <br />
 <br />
 
-<MudDataGrid T="MenuItem" Items="@items" MultiSelection="true" SelectedItemsChanged="SelectedItemChangedParent">
+<MudDataGrid T="MenuItem" Items="@displayItems" MultiSelection="true" SelectedItemsChanged="SelectedItemChangedParent">
     <Columns>
         <SelectColumn T="MenuItem"/>
         <Column T="MenuItem" Field="Link" />
@@ -64,6 +64,8 @@
 
     private List<MenuItem> items;
 
+    private List<MenuItem> displayItems;
+
     private string menuItemsJsonStringFormatted;
 
     private HashSet<MenuItem> selectedItemsParent = new HashSet<MenuItem>();
@@ -79,6 +81,8 @@
         var menuItems = await Http.GetFromJsonAsync<MenuItem[]>("https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/menu.json");
 
         items = menuItems.ToList();
+
+        displayItems = menuItems.Where(m => m.MarkDownFileName != "" && m.MarkDownFileName != null || m.Children.Any(c => c.MarkDownFileName != "" && m.MarkDownFileName != null)).ToList();
 
         await base.OnInitializedAsync();
     }
@@ -129,7 +133,7 @@
         }
 
         items = items.Except(parentsToRemove).ToList();
-
+        
         var json = JsonSerializer.Serialize(items);
 
         var content = new MultipartFormDataContent();
@@ -139,6 +143,15 @@
         content.Add(fileContent, "File", "menu.json");
 
         await Http.PostAsync("https://blazortutorialbackendfunctions.azurewebsites.net/api/UploadMarkdownFile", content);
+
+        var markDownFileNames = selectedItemsParent.Select(i => i.MarkDownFileName).ToList();
+
+        markDownFileNames.AddRange(selectedItemsChild.Select(i => i.MarkDownFileName).ToList());
+
+        foreach (var markDownFileName in markDownFileNames)
+        {
+            await Http.DeleteAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DeleteMarkdownFile/{markDownFileName}");
+        }
 
         ApplicationState.GlobalNotification.Add(Localizer["i18n_Deleted_Successfully"]);
            

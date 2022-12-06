@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/{lang}/index"
 @page "/{lang}"
+@page "/{lang}/langChanged"
 
 @using BlazorTutorial.Core.StateHandling
 @using BlazorTutorial.Core.Services
@@ -22,7 +23,13 @@ Welcome to your new app.
 <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="ShowLoadingAnimation">@Localizer["i18n_Show_Loading_Animation"]</MudButton>
 <br />
 <br />
-<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
+<MudExpansionPanels>
+    <MudExpansionPanel Text="@Localizer["i18n_Get_Details"]">
+        <pre>
+            @((MarkupString)_loadingAnimation)
+        </pre>
+    </MudExpansionPanel>
+</MudExpansionPanels>
 
 <br />
 <br />
@@ -30,7 +37,13 @@ Welcome to your new app.
 <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="ShowNotification">@Localizer["i18n_Show_Notification"]</MudButton>
 <br />
 <br />
-<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
+<MudExpansionPanels>
+    <MudExpansionPanel Text="@Localizer["i18n_Get_Details"]">
+        <pre>
+            @((MarkupString)_notification)
+</pre>
+    </MudExpansionPanel>
+</MudExpansionPanels>
 
 <br />
 <br />
@@ -38,7 +51,13 @@ Welcome to your new app.
 @Localizer["i18n_Always_Last_Active_Site"]
 <br />
 <br />
-<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
+<MudExpansionPanels>
+    <MudExpansionPanel Text="@Localizer["i18n_Get_Details"]">
+        <pre>
+            @((MarkupString)_cookieHandling)
+        </pre>
+    </MudExpansionPanel>
+</MudExpansionPanels>
 
 <br />
 <br />
@@ -48,8 +67,13 @@ Welcome to your new app.
 <i>@_settingValue</i>
 <br />
 <br />
-<MudLink Href="#">@Localizer["i18n_Get_Details"]</MudLink>
-
+<MudExpansionPanels>
+    <MudExpansionPanel Text="@Localizer["i18n_Get_Details"]">
+        <pre>
+            @((MarkupString)_settings)
+        </pre>
+    </MudExpansionPanel>
+</MudExpansionPanels>
 
 @code {
     [CascadingParameter]
@@ -60,9 +84,25 @@ Welcome to your new app.
 
     private string _settingValue;
 
+    private string _loadingAnimation;
+
+    private string _notification;
+
+    private string _cookieHandling;
+
+    private string _settings;
+
     protected override void OnInitialized()
     {
         _settingValue = SettingService.GetValue<string>("DummySettingValue");
+
+        _loadingAnimation = @Localizer["i18n_loading_animation"];
+
+        _notification = @Localizer["i18n_notification"];
+
+        _cookieHandling = @Localizer["i18n_cookie_handling"];
+
+        _settings = @Localizer["i18n_settings"];
 
         base.OnInitialized();
     }

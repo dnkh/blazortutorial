@@ -22,6 +22,11 @@
             return !string.IsNullOrEmpty(lang) && this.languageOptions.GetLanguages().Any(x => x.Equals(lang, StringComparison.OrdinalIgnoreCase));
         }
 
+        public bool IsLanguageRedirect(string uri)
+        {
+            return uri.Contains("langChanged");
+        }
+
         public string GetUriLanguage()
         {
             var uri = this.navigationManager.Uri;
@@ -50,7 +55,7 @@
         public void NavigateToDefault(string lang = "", bool forceLoad = true)
         {
             lang = string.IsNullOrEmpty(lang) ? this.languageOptions.TwoLetterISODefaultLanguage : lang;
-            this.navigationManager.NavigateTo($"/{lang}", forceLoad: forceLoad);
+            this.navigationManager.NavigateTo($"/{lang}/langChanged", forceLoad: forceLoad);
         }
 
         public string GetLanguageUrl(string lang, string url)
