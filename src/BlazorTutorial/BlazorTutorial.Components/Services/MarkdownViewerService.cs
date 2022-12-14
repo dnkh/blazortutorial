@@ -22,5 +22,12 @@ namespace BlazorTutorial.Components.Services
 
            return files.ToList();
         }
+
+        public async Task<string> GetMarkdownFileByName(string name)
+        {
+            var file = await _httpClient.GetStringAsync($"https://blazortutorialbackendfunctions.azurewebsites.net/api/DownloadMarkdownFile/{name}");
+
+            return file;
+        }
     }
 }

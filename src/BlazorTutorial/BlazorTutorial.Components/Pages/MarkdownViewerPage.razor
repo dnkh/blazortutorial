@@ -40,6 +40,16 @@ else
     }
 </ul>
 }
+<br />
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="GetMarkDownFileByName">@Localizer["i18n_Button_Load"]</MudButton>
+<br />
+<br />
+<div>
+    <MarkdownViewer Body="@firstMarkDownFile"></MarkdownViewer>
+</div>
+
+
 @code
 {
     [Parameter]
@@ -53,11 +63,19 @@ else
 
     private List<string> files = new List<string>();
 
+    private string firstMarkDownFile = string.Empty;
+
     private async Task GetAllFiles()
     {
         var viewer = new MarkdownViewerService(Http);
 
         files = await viewer.GetAllMarkdownFileNames();
+    }
 
+    private async Task GetMarkDownFileByName()
+    {
+        var viewer = new MarkdownViewerService(Http);
+
+        firstMarkDownFile = await viewer.GetMarkdownFileByName("TestFile1.md");
     }
 }
